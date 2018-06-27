@@ -1,0 +1,48 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Jul 27 15:17:15 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                   .org_1       code   0x000004    program   0x00003e
+                   .org_2       code   0x000100    program   0x000028
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000022      
+                            0x000100    0x000113      
+            54 out of 2310 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Done   0x00001a    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+              Loopforever   0x000112    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                     Mark   0x000012    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+             MarkAndSpace   0x000014    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                   SetLow   0x000019    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                    Start   0x000100    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                 TimerPop   0x00001d    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     Mark   0x000012    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+             MarkAndSpace   0x000014    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                   SetLow   0x000019    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                     Done   0x00001a    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                 TimerPop   0x00001d    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+                    Start   0x000100    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+              Loopforever   0x000112    program     static C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\RS485Enable\RTS.asm
+
+

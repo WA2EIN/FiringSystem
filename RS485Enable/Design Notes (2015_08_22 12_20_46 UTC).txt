@@ -1,0 +1,7 @@
+Add 5 Volt Regulator 7y805 in place of existing regulator.  Feed 3 Volt regulator from 5 volt source.  This increases the operating voltage range to +30 volts.
+
+Add speed selection header to allow the PIC12F683 to operate at different serial speeds.
+
+Relocate the RS-232 input so that it is conveniently placed when all three radios are installed.
+
+Add power selection jumper to enable the Xtend and 9Xcite radios to operate from 5 Volts.
