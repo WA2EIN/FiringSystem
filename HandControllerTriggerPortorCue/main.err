@@ -1,0 +1,5 @@
+Warning[2066] C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\TriggerPortorCue\main.c 1040 : type qualifier mismatch in assignment
+Warning[2066] C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\TriggerPortorCue\main.c 1045 : type qualifier mismatch in assignment
+Warning[2054] C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\TriggerPortorCue\main.c 1364 : suspicious pointer conversion
+Warning[2054] C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\TriggerPortorCue\main.c 1373 : suspicious pointer conversion
+Warning[2066] C:\Users\Peter\Dropbox\FiringSystemDdevelopment\PIC\TriggerPortorCue\main.c 1471 : type qualifier mismatch in assignment
