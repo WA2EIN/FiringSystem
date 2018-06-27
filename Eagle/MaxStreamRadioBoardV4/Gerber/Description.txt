@@ -1,0 +1,20 @@
+The Gerber files are identified as follows:
+
+.cmp    -       Top Copper Layer
+.sol    -       Bottom Copper Layer
+.stc    -       Top Solder Mask
+.sts    -       Bottom Solder Mask
+.drd    -       Drill data
+.drl    -       Drill size
+
+Note:   No printed overlay layer has been included.  I do not want any printed silk screen.
+
+Payment has been sent via eBay and Paypal from cranwell41.
+
+My address is:
+
+Peter Cranwell
+247 Mountain Breeze Lane
+New Castle, Va
+24127
+

@@ -1,0 +1,23 @@
+Circuit: * C:\Users\pete\Desktop\LTSpiceModels\MatrixSenseOpenEmatch.asc
+
+WARNING: Less than two connections to node N005.  This node is used by M3.
+WARNING: Less than two connections to node N006.  This node is used by M2.
+Direct Newton iteration for .op point succeeded.
+
+Date: Tue Jun 26 09:55:53 2018
+Total elapsed time: 0.226 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3774
+traniter = 3734
+tranpoints = 1530
+accept = 1419
+rejected = 111
+matrix size = 17
+fillins = 8
+solver = Normal
+Matrix Compiler1: 1.38 KB object code size  0.6/0.5/[0.2]
+Matrix Compiler2: off  [0.3]/0.6/0.9
+

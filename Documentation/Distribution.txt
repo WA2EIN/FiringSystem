@@ -1,0 +1,22 @@
+To distribute the Access2010 database, the target machine needs to install
+AccessRuntime_X64 or the 32 bit version.  This is available for download
+from Microsoft.  This allows the ACCESS database to be run without
+a full installation of Access.
+
+The user machine also needs the AccessDatabaseEngins_X64.  Its downloadable from Microsoft.
+
+The ACCESS database is installed in C:\PyroController.
+
+
+Plugging in USB modem requires FT232 drivers.  Let the drivers download from the Microsoft
+site.  Allow auto installation.
+
+Depending on the type of modem chip, a different COM port will be assigned when the device
+is plugged in after the drivers are installed.
+
+
+When publishing the application, Include all application components.
+Normally, these are not include if they are already installed on the machine
+but it is necessary to include them because the target machine
+may not have office components.  Include all application components
+listed in the Application Files section of the Publish Tab.

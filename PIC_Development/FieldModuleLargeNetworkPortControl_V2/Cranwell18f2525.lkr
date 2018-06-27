@@ -1,0 +1,31 @@
+// File: 18f2525.lkr
+// Sample linker script for the PIC18F2515 processor
+
+LIBPATH .
+
+
+// The following was changes to properly initialize data
+FILES c018i.o
+
+FILES clib.lib
+FILES p18f2525.lib
+
+CODEPAGE   NAME=page       START=0x0               END=0xAFFF
+CODEPAGE   NAME=idlocs     START=0x200000          END=0x200007       PROTECTED
+CODEPAGE   NAME=config     START=0x300000          END=0x30000D       PROTECTED
+CODEPAGE   NAME=devid      START=0x3FFFFE          END=0x3FFFFF       PROTECTED
+
+ACCESSBANK NAME=accessram  START=0x0            END=0x7F
+DATABANK   NAME=gpr0       START=0x80           END=0xFF
+DATABANK   NAME=BIGBANK    START=0x100          END=0x9FF           
+DATABANK   NAME=IBANK      START=0xA00          END=0xCFF
+DATABANK   NAME=UARTBANK   START=0xD00          END=0xEFF
+DATABANK   NAME=gpr15      START=0xF00          END=0xF7F
+ACCESSBANK NAME=accesssfr  START=0xF80          END=0xFFF          PROTECTED
+SECTION    NAME=CONFIG     ROM=config
+SECTION    NAME=BIGDATA    RAM=BIGBANK
+SECTION    NAME=IDATA      RAM=IBANK
+SECTION    NAME=UARTDATA   RAM=UARTBANK
+
+
+STACK SIZE=0x80 RAM=gpr15

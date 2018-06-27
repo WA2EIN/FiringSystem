@@ -1,0 +1,5 @@
+The models in this directory require LTSpice.
+
+Some models require the addition of models for some of the model transistors.
+
+Copy ZVN4306A.mod to c:/subckt for the LTSpice simulator.

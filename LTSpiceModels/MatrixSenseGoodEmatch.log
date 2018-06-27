@@ -1,0 +1,22 @@
+Circuit: * C:\Users\pete\Desktop\LTSpiceModels\MatrixSenseGoodEmatch.asc
+
+R4: both pins shorted together -- ignoring.
+Direct Newton iteration for .op point succeeded.
+
+Date: Tue Jun 26 09:56:22 2018
+Total elapsed time: 0.202 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 4052
+traniter = 4011
+tranpoints = 1614
+accept = 1496
+rejected = 118
+matrix size = 24
+fillins = 8
+solver = Normal
+Matrix Compiler1: 2.01 KB object code size  0.7/0.8/[0.3]
+Matrix Compiler2: off  [0.5]/0.9/1.5
+
