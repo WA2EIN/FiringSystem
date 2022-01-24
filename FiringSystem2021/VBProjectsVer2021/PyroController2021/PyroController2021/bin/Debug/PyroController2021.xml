@@ -1,0 +1,341 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PyroController2021
+</name>
+</assembly>
+<members>
+<member name="T:PyroController2014.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:PyroController2014.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:PyroController2014.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.Paste_ErrorsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowEventsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.Paste_ErrorsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowEventsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.Paste_ErrorsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1.ShowEventsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.Paste_ErrorsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.ShowTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.ShowEventsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateUpdatedRows(PyroController2014.ShowDatabaseDataSet1,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateInsertedRows(PyroController2014.ShowDatabaseDataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateDeletedRows(PyroController2014.ShowDatabaseDataSet1,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateAll(PyroController2014.ShowDatabaseDataSet1)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet1TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.Paste_ErrorsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowEventsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.Paste_ErrorsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowEventsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.Paste_ErrorsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet.ShowEventsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.ShowEventsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.Paste_ErrorsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.ShowTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(PyroController2014.ShowDatabaseDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(PyroController2014.ShowDatabaseDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(PyroController2014.ShowDatabaseDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.UpdateAll(PyroController2014.ShowDatabaseDataSet)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.Paste_ErrorsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowEventsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.Paste_ErrorsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowEventsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.Paste_ErrorsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2.ShowEventsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.Paste_ErrorsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.ShowTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.ShowEventsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.UpdateUpdatedRows(PyroController2014.ShowDatabaseDataSet2,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.UpdateInsertedRows(PyroController2014.ShowDatabaseDataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.UpdateDeletedRows(PyroController2014.ShowDatabaseDataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.UpdateAll(PyroController2014.ShowDatabaseDataSet2)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:PyroController2014.ShowDatabaseDataSet2TableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+</members>
+</doc>

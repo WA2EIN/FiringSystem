@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DDB116AD-A50F-47E5-A7D3-838ECD12882D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PyroController2014.My.MyApplication</StartupObject>
+    <RootNamespace>PyroController2014</RootNamespace>
+    <AssemblyName>PyroController2021</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Public\PyroController\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>70</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>PyroController2021.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>PyroController2021.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0A68A5BCA1F71799FF1AE277059CB7A4F4F7050C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PyroController2014_2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cGPS.vb" />
+    <Compile Include="fDecode.Designer.vb">
+      <DependentUpon>fDecode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fDecode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fGPSTest.Designer.vb">
+      <DependentUpon>fGPSTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fGPSTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fCSVImport.Designer.vb">
+      <DependentUpon>fCSVImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fCSVImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fLoadTestcase.Designer.vb">
+      <DependentUpon>fLoadTestcase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fLoadTestcase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cPollNetwork.vb" />
+    <Compile Include="cCommand.vb" />
+    <Compile Include="cComm.vb" />
+    <Compile Include="fCreateMyDirectory.Designer.vb">
+      <DependentUpon>fCreateMyDirectory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fCreateMyDirectory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fFieldModuleStatus.Designer.vb">
+      <DependentUpon>fFieldModuleStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fFieldModuleStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cInitialization.vb" />
+    <Compile Include="fManualFire.Designer.vb">
+      <DependentUpon>fManualFire.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fManualFire.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fClock.Designer.vb">
+      <DependentUpon>fClock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fClock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fCreateShow.Designer.vb">
+      <DependentUpon>fCreateShow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fCreateShow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fQueryBuildDate.Designer.vb">
+      <DependentUpon>fQueryBuildDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fQueryBuildDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fVoltage.Designer.vb">
+      <DependentUpon>fVoltage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fVoltage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fPortsView.Designer.vb">
+      <DependentUpon>fPortsView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fPortsView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSelectShow.Designer.vb">
+      <DependentUpon>fSelectShow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fSelectShow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSerialPorts.Designer.vb">
+      <DependentUpon>fSerialPorts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fSerialPorts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSetFieldModuleAddress.Designer.vb">
+      <DependentUpon>fSetFieldModuleAddress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fSetFieldModuleAddress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSetup.Designer.vb">
+      <DependentUpon>fSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fLatencyX.Designer.vb">
+      <DependentUpon>fLatencyX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fLatencyX.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fNetworkTopology.Designer.vb">
+      <DependentUpon>fNetworkTopology.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fNetworkTopology.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\ShowDatabaseDataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShowDatabaseDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDatabaseDataSet.vb">
+      <DependentUpon>ShowDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="cShowEvent.vb" />
+    <Compile Include="fShow.Designer.vb">
+      <DependentUpon>fShow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fShow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTrace.Designer.vb">
+      <DependentUpon>fTrace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fTrace.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowDatabaseDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShowDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="cTimeCode.vb" />
+    <Compile Include="fUnitStatus.Designer.vb">
+      <DependentUpon>fUnitStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fUnitStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fMain.Designer.vb">
+      <DependentUpon>fMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cMessage.vb" />
+    <Compile Include="mModule1.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="cPorts.vb" />
+    <Compile Include="cStopWatch.vb" />
+    <Compile Include="cTraceComm.vb" />
+    <Compile Include="cUnits.vb" />
+    <Compile Include="cWorkUnit.vb" />
+    <Compile Include="ShowDatabaseDataSet2.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShowDatabaseDataSet2.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fClock.resx">
+      <DependentUpon>fClock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fCreateMyDirectory.resx">
+      <DependentUpon>fCreateMyDirectory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fDecode.resx">
+      <DependentUpon>fDecode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fFieldModuleStatus.resx">
+      <DependentUpon>fFieldModuleStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fGPSTest.resx">
+      <DependentUpon>fGPSTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fCSVImport.resx">
+      <DependentUpon>fCSVImport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fLoadTestcase.resx">
+      <DependentUpon>fLoadTestcase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fManualFire.resx">
+      <DependentUpon>fManualFire.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fCreateShow.resx">
+      <DependentUpon>fCreateShow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fQueryBuildDate.resx">
+      <DependentUpon>fQueryBuildDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fVoltage.resx">
+      <DependentUpon>fVoltage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fPortsView.resx">
+      <DependentUpon>fPortsView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fSelectShow.resx">
+      <DependentUpon>fSelectShow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fSerialPorts.resx">
+      <DependentUpon>fSerialPorts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fSetFieldModuleAddress.resx">
+      <DependentUpon>fSetFieldModuleAddress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fSetup.resx">
+      <DependentUpon>fSetup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fLatencyX.resx">
+      <DependentUpon>fLatencyX.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fMain.resx">
+      <DependentUpon>fMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fNetworkTopology.resx">
+      <DependentUpon>fNetworkTopology.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fShow.resx">
+      <DependentUpon>fShow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTrace.resx">
+      <DependentUpon>fTrace.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fUnitStatus.resx">
+      <DependentUpon>fUnitStatus.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app1.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="PyroController2014_2_TemporaryKey.pfx" />
+    <None Include="Resources\ShowDatabaseDataSet1.xsc">
+      <DependentUpon>ShowDatabaseDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\ShowDatabaseDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ShowDatabaseDataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\ShowDatabaseDataSet1.xss">
+      <DependentUpon>ShowDatabaseDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ShowDatabaseDataSet.xsc">
+      <DependentUpon>ShowDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ShowDatabaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ShowDatabaseDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ShowDatabaseDataSet.xss">
+      <DependentUpon>ShowDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ShowDatabaseDataSet2.xsc">
+      <DependentUpon>ShowDatabaseDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ShowDatabaseDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ShowDatabaseDataSet2.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ShowDatabaseDataSet2.xss">
+      <DependentUpon>ShowDatabaseDataSet2.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GPSDataStream.txt" />
+    <Content Include="ShowDatabase.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\ShowDatabase.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
