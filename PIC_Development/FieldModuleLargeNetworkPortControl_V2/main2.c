@@ -1,6 +1,7 @@
 #pragma config  OSC=INTIO67,FCMEN=OFF, IESO=OFF, PWRT = ON, BOREN=OFF,   WDT=OFF,  WDTPS=128, MCLRE=ON,  LPT1OSC = OFF,PBADEN=OFF,LVP=OFF, DEBUG=OFF// , CPB=OFF,CP0=OFF,CP1=OFF,CP2=OFF, CPD = OFF
-#define Today "Build Date = 9/12/2016, (C) Peter C Cranwell, 2016"
+#define Today "Build Date = 1/25/2022, (C) Peter C Cranwell, 2022"
 #define MaxPacketLength            213    // Maximum Packet Length
+#define MATCH_FIRE_TIME 20
 
 ram int                   MS;
 ram unsigned long         ShowTimeMS; 
@@ -54,6 +55,7 @@ extern int volatile NQueue;
  '                                        7/17/2014     Turned OFF BORESET to eliminate Rearm dropout on unit 301
  '                                       11/19/2014     Turned on MCLRE to work with Microchip MCP100 Reset IC
  '                                        9/12/2016     Reduced time in Fire Cuee loop to permit 1MS event spacing
+ '                                        1/25/2022     Reduced eMatch ON time to 20 Ms for testing firing circuit evaluation with scope and simulated eMatch
  '                                 
  '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  '  Slave Pyrotechnic Firing Controller with RS-485 Link to Headend Controller.
@@ -595,7 +597,7 @@ RAM char                  TEventParameterEnd;
 RAM int                   IgnoreIgnore;
 RAM char                  SeqTable[17][4] ={ "  ", "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015","016"};
 
-RAM long                  MatchFireTime = 50;
+RAM long                  MatchFireTime = MATCH_FIRE_TIME;
 RAM int                   NoMsgNumberIncrement = FALSE;
 RAM int                   BlipCtr;
 RAM int                   LastFire;

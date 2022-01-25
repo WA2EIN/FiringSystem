@@ -65,16 +65,16 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0A68A5BCA1F71799FF1AE277059CB7A4F4F7050C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3AF30070DA09FC1725C2660534E07EA2EC1E54E0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>PyroController2014_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>PyroController2021_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -374,6 +374,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="PyroController2014_2_TemporaryKey.pfx" />
+    <None Include="PyroController2021_TemporaryKey.pfx" />
     <None Include="Resources\ShowDatabaseDataSet1.xsc">
       <DependentUpon>ShowDatabaseDataSet1.xsd</DependentUpon>
     </None>

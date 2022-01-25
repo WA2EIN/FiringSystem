@@ -98,10 +98,10 @@ Public Class fPortsView
                 TTip.InitialDelay = 10
                 TTip.SetToolTip(.Button, .Port.valEffect)
 
-                If .IsInShow = False Then
-                    .Button.Visible = False
-                End If
-                
+                ' If .IsInShow = False Then
+                '.Button.Visible = False
+                'End If
+
 
 
             End With
@@ -121,7 +121,7 @@ Public Class fPortsView
 
                 Else
                     Units(UnitIndex).Ports(i).Button.BackColor = Color.LightSteelBlue
-                    Units(UnitIndex).Ports(i).Button.Visible = False
+                    ' Units(UnitIndex).Ports(i).Button.Visible = False
                 End If
                 Else
                 Units(UnitIndex).Ports(i).Button.BackColor = Color.Red

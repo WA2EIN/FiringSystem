@@ -171,6 +171,9 @@ Public Class fShow
 
         NumberOfRows = DataGridView1.Rows.Count
 
+
+
+        '---------------------------------------------------------------------------------------------
         For Me.i = 0 To NumberOfRows - 2
 
             DataGridView1.CurrentCell = DataGridView1.Rows(Me.i).Cells(ShowIDCol)
@@ -195,7 +198,7 @@ Public Class fShow
             End If
         Next
 
-
+        '-------------------------------------------------------------------------------------------------
 
         Arm.Visible = False
         CueCount = 0
@@ -362,7 +365,14 @@ Public Class fShow
                         ShowT(ShowIndex).TimeBefore = DataGridView1.CurrentRow.Cells(TimeCol).Value
                         ShowT(ShowIndex).NextSequence = DataGridView1.CurrentRow.Cells(NextSeqCol).Value
 
+                        If cue > 0 Then
+                            LastEventTime = 0
+                        End If
 
+
+
+
+                        '-----------------------------------------------------------------------------------------------------------------
 
                         ' Throw an error if this has been chained to and chained from has a before time greater than
                         '   my time.  Chained events must be in time sequence.
@@ -383,6 +393,8 @@ Public Class fShow
                             End If
 
                         End If
+
+                        '-----------------------------------------------------------------------------------------------------------------
 
 
                         ShowIndex = ShowIndex + 1
@@ -1103,6 +1115,10 @@ Public Class fShow
             fClock.Hide()
         End If
 
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 End Class

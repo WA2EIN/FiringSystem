@@ -31,9 +31,11 @@ Public Class fSelectShow
     End Sub
 
     Private Sub DataGridView1_CellContentClick_2(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        Me.Hide()
+
         fShow.TextBox1.Text = DataGridView1.CurrentRow.Cells(0).Value
         fShow.Show()
-        Me.Hide()
+
     End Sub
 End Class
 
