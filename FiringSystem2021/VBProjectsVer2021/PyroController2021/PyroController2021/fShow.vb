@@ -70,13 +70,13 @@ Public Class fShow
     ' This changes when changes to DataGridView1 layout is changed
     Const KeyCol As Integer = 0
     Const ShowIDCol As Integer = 1
-    Const ModuleCol As Integer = 4
-    Const PortCol As Integer = 5
-    Const CueCol As Integer = 8
-    Const TimeCol As Integer = 9
-    Const SeqCol As Integer = 10
-    Const NextSeqCol As Integer = 11
-    Const EffectCol = 18
+    Const ModuleCol As Integer = 2
+    Const PortCol As Integer = 3
+    Const CueCol As Integer = 4
+    Const TimeCol As Integer = 5
+    Const SeqCol As Integer = 6
+    Const NextSeqCol As Integer = 7
+    Const EffectCol = 9
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     Private Sub ShowForm_Disposed(sender As Object, e As System.EventArgs) Handles Me.Disposed
@@ -600,7 +600,7 @@ Public Class fShow
 
 
         fMain.Timer1.Stop()
-        fMain.Timer1.Interval = 1000
+        fMain.Timer1.Interval = DEAD_MAN_INTERVAL
         fMain.Timer1.Enabled = True
         fMain.Timer1.Start()
 
@@ -694,7 +694,7 @@ Public Class fShow
 
 
         If SIMULATE = False Then
-            fMain.Timer1.Interval = 10000
+            fMain.Timer1.Interval = DEAD_MAN_INTERVAL
             fMain.Timer1.Start()
             fMain.Timer1.Enabled = True
         End If

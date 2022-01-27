@@ -7,6 +7,7 @@ Imports System.Diagnostics.Stopwatch
 Imports Microsoft.VisualBasic
 Imports Microsoft.VisualBasic.ApplicationServices
 
+
 Module mModule1
     ' GPS Data Structure
     Structure PinButton
@@ -87,6 +88,7 @@ Module mModule1
             Me._value = value
         End Sub
     End Structure
+    Public Const DEAD_MAN_INTERVAL As Integer = 30000
     Public DEBUG As Boolean = False
     Public SIMULATE As Boolean
     Public Const MAXNODES As Integer = 999

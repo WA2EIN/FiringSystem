@@ -330,4 +330,8 @@ Public Class fCSVImport
     Private Sub LoadButton_Click(sender As System.Object, e As System.EventArgs) Handles LoadButton.Click
 
     End Sub
+
+    Private Sub fCSVImport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

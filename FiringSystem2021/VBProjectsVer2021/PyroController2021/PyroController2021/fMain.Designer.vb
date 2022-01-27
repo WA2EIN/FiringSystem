@@ -57,7 +57,7 @@ Partial Class fMain
         '
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(35, 32)
-        Me.ListBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ListBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(696, 368)
         Me.ListBox1.TabIndex = 0
@@ -66,7 +66,7 @@ Partial Class fMain
         '
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(752, 9)
-        Me.ComboBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(29, 21)
         Me.ComboBox2.TabIndex = 1
@@ -165,6 +165,7 @@ Partial Class fMain
         '
         'TestGPSCalculationsToolStripMenuItem
         '
+        Me.TestGPSCalculationsToolStripMenuItem.Enabled = False
         Me.TestGPSCalculationsToolStripMenuItem.Name = "TestGPSCalculationsToolStripMenuItem"
         Me.TestGPSCalculationsToolStripMenuItem.Size = New System.Drawing.Size(131, 20)
         Me.TestGPSCalculationsToolStripMenuItem.Text = "Test GPS Calculations"
@@ -172,21 +173,25 @@ Partial Class fMain
         '
         'LoadCSVToolStripMenuItem1
         '
+        Me.LoadCSVToolStripMenuItem1.Enabled = False
         Me.LoadCSVToolStripMenuItem1.Name = "LoadCSVToolStripMenuItem1"
         Me.LoadCSVToolStripMenuItem1.Size = New System.Drawing.Size(178, 20)
         Me.LoadCSVToolStripMenuItem1.Text = "Load ShowDatabase from CSV"
+        Me.LoadCSVToolStripMenuItem1.Visible = False
         '
         'TestCaseToolStripMenuItem
         '
+        Me.TestCaseToolStripMenuItem.Enabled = False
         Me.TestCaseToolStripMenuItem.Name = "TestCaseToolStripMenuItem"
         Me.TestCaseToolStripMenuItem.Size = New System.Drawing.Size(149, 20)
         Me.TestCaseToolStripMenuItem.Text = "Load Simulated Network"
+        Me.TestCaseToolStripMenuItem.Visible = False
         '
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Location = New System.Drawing.Point(737, 44)
-        Me.ComboBox3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(85, 21)
         Me.ComboBox3.TabIndex = 3
@@ -212,7 +217,7 @@ Partial Class fMain
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "fMain"
         Me.Text = "Pyro Controller 2021"
         Me.MenuStrip1.ResumeLayout(False)

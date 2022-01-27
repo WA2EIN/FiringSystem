@@ -192,7 +192,7 @@ Public Class fManualFire
             Button1.BackColor = Color.LightGray
             Button1.Text = "DISARMED"
             ' This deactivates the 10 second time message when the system is disarmed.
-            fMain.Timer1.Interval = 3000
+            fMain.Timer1.Interval = 10000
             fMain.Timer1.Enabled = False
             fMain.Timer1.Stop()
             Timer3.Stop()
@@ -206,7 +206,7 @@ Public Class fManualFire
 
             Button1.BackColor = Color.Red
             Button1.Text = "ARMED"
-            fMain.Timer1.Interval = 5000
+            fMain.Timer1.Interval = DEAD_MAN_INTERVAL
             fMain.Timer1.Enabled = True
             fMain.Timer1.Start()
             TextBox1.Text = "Units Armed"

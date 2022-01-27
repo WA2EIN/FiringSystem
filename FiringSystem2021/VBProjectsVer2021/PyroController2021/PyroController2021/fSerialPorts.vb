@@ -7,7 +7,7 @@ Public Class fSerialPorts
     End Sub
 
     Private Sub fSerialPorts_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
+        ComboBox1.Text = GetComPort()
     End Sub
 
     Public Sub New()

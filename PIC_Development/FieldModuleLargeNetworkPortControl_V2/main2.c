@@ -278,7 +278,7 @@ RAM char				        cNumPorts[4] = "016";
 
 #define DefaultTOT              290         // Receive TOT MS
 #define TEventTOT               50          // TEvent Message Polling Time
-#define DeadManCount            90          // 15 Sec at Default TOT = 300 MS   (One count every 10 TOT)
+#define DeadManCount            180         // 30 Sec at Default TOT = 300 MS   (One count every 10 TOT)
 #define Out                     1  
 #define In                      2
 #define TO                      3
@@ -971,7 +971,7 @@ void main(void)
                         
 
 
-
+					/*    Removed.    Not necessary
 
                     // Bypass all events less than current time
                     // This prevents mass firing events during recovery operation
@@ -998,7 +998,7 @@ void main(void)
                         }
                     } 
 
-
+					*/
 
 
 
@@ -1937,7 +1937,7 @@ void Receive(char volatile Mesg[])
         DeadManCounter = 0;
        
     }
-    AllPinsOff();
+    AllPinsOff();    // Turn off any pins that have been ON from a firing event
 
     Timer1MS += ResetTimer1();
     if (Timer1MS > DefaultTOT)
@@ -2373,6 +2373,8 @@ void Dump (char *Start, int Len)
 
 void AllPinsOff(void)
 {
+
+// Turn off pins that have been on from firing event if they exceed FireTime + MatchFireTime
     int i,Pin;
     char TraceMsg[40];
 
@@ -2430,8 +2432,8 @@ void Fire(int Cue)
     //if (Pin != LastFire)
     //{
         PinHIGH(Pin);
-        // Removed 9/12/2016 to reduce Cue fire loop time to allow 1MS Cue spacing
-        //ShowTimeMS = GetTimeMS();
+        // Originally removed 9/12/2016 to reduce Cue fire loop time to allow 1MS Cue spacing
+        ShowTimeMS = GetTimeMS();
         CueOffTime[Cue] = ShowTimeMS + MatchFireTime;   
         AnyPinOn = 1;
         LastFire = Pin;
