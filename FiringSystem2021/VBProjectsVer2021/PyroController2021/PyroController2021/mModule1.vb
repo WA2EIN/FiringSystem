@@ -126,8 +126,8 @@ Module mModule1
     Public Const MaxPacketSize As Integer = 130
     Public Const MaxReplyLength As Integer = 47
     Public GlobalResetData As String = "1019999999900000000"
-    Public TimeMsg As String = "1019999980000000000"
-    Public TimeBase As String = "10199999800"
+    Public TimeMsg As String = "1019999800000000"
+    Public TimeBase As String = "10199998"
     Public ShowTime As Long
     Public Msg As cMessage
     Public TimeMessage As String

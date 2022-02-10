@@ -9,14 +9,14 @@ Public Class fSetup
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Running = True
-        Dim Data As String
-        Dim Addr As Integer
-        Dim len As Integer
-        Dim ModuleAddress As Integer
-        Dim X As Integer
+        'Dim Data As String
+        ' Dim Addr As Integer
+        'Dim len As Integer
+        'Dim ModuleAddress As Integer
+        'Dim X As Integer
         Dim CMD As New cCommand
-        Dim ButLoc As Point
-        Dim NetworkTopology As String
+        'Dim ButLoc As Point
+        'Dim NetworkTopology As String
         Dim Proc As New Process
 
 

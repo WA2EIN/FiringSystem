@@ -236,6 +236,14 @@ Public Class fShow
         Dim Net = New cPollNetwork
 
         LastEventTime = 0
+        cueptr = 0
+        Me.ProgModules.Visible = False
+
+        Me.ActivateModules.Visible = False
+
+        TextBox2.ForeColor = Color.White
+        TextBox2.BackColor = Color.Red
+
 
 
         Traceit("Begin Programming Units")
@@ -243,7 +251,7 @@ Public Class fShow
         ' Start all Active Field Modules
         StartFieldModules()
         Application.DoEvents()
-        'End If
+
 
 
         tot = CommPort.ReadTOT
@@ -251,8 +259,9 @@ Public Class fShow
         UnitIndex = 1
 
 
-
-        ' Find Field Modules to program by stepping through datagridview
+        '----------------------------------------------------------------------------------------
+        ' Determine Field Modules to program by stepping through datagridview
+        '----------------------------------------------------------------------------------------
 
         NumberOfRows = DataGridView1.RowCount
 
@@ -287,12 +296,17 @@ Public Class fShow
         Next
 
 
+        '-------------------------------------------------------------------------------------------------------------------------
         ' UnitIndex now has the count of units to program and
         ' UnitArray has a list of the units to program
+        '-------------------------------------------------------------------------------------------------------------------------
+
 
 
         ' Check to make sure required Field Modules are Active and have active Sessions
         ' Program what you can and warn for offline units
+
+
         For i = 1 To UnitIndex - 1
             Dim Active As Boolean = False
             For j = 1 To MAXNODES
@@ -308,32 +322,57 @@ Public Class fShow
 
 
 
+
+
+        '---------------------------------------------------------------------------------------------------
         ' Sort Datagridview into Seq order
         ' This is required for microprocessor programming
+        '---------------------------------------------------------------------------------------------------
 
 
         CommPort.ReadTOT = 500
 
+        '---------------------------------------------------------------------------
         ' Step thru UnitArray , field module by field module
+        '---------------------------------------------------------------------------
+
         For i = 1 To UnitIndex - 1
             LastEventTime = 0
             ShowIndex = 0
             Unit = UnitArray(i)
+
+
+            '---------------------------------------------------------------------------------
+            ' Program Active Units
+            '---------------------------------------------------------------------------------
+
             If Units(Unit).Active = True Then
                 UnitNumber = Val(Unit)
                 TextBox2.Text = "Programming Unit " & UnitNumber
                 Application.DoEvents()
 
 
+
+                '------------------------------------------------
+                ' Program this unit
+                '------------------------------------------------
+
                 For j = 0 To NumberOfRows - 2
                     ' Step thru the DataGridView, row by row
                     DataGridView1.CurrentCell = DataGridView1.Rows(j).Cells(ShowIDCol)
                     k = DataGridView1.CurrentRow.Index
 
+                    '-----------------------------------
                     ' Get all data for this module
+                    '-----------------------------------
                     If Unit = DataGridView1.CurrentRow.Cells(ModuleCol).Value Then     ' Extract Unit Number
 
+
+
+
+                        '-----------------------------------------
                         ' Load ShowT array with this unit's data
+                        '-----------------------------------------
                         ShowT(ShowIndex).Unit = Unit
                         Try
                             ' extract cue from datagrid
@@ -349,13 +388,20 @@ Public Class fShow
                                         k = MAXCUES
                                     End If
                                 Next
-
                             End If
-                        Catch
-                            ' catch null values in database
-                            cue = 0
 
+                        Catch
+                            ' catch null values in database.   Should have been coded 0
+                            cue = 0
                         End Try
+
+
+
+                        '----------------------------------------------------------------------------------
+                        'NOTE:  Seq and Next Seq from datagrid refer to positions in the database
+                        '       These values need to be resolved into values for the field unit modules.
+                        '----------------------------------------------------------------------------------
+
 
 
 
@@ -365,6 +411,12 @@ Public Class fShow
                         ShowT(ShowIndex).TimeBefore = DataGridView1.CurrentRow.Cells(TimeCol).Value
                         ShowT(ShowIndex).NextSequence = DataGridView1.CurrentRow.Cells(NextSeqCol).Value
 
+
+
+
+
+                        '   Force sequential time check with a new Cue
+
                         If cue > 0 Then
                             LastEventTime = 0
                         End If
@@ -373,9 +425,9 @@ Public Class fShow
 
 
                         '-----------------------------------------------------------------------------------------------------------------
-
                         ' Throw an error if this has been chained to and chained from has a before time greater than
                         '   my time.  Chained events must be in time sequence.
+                        '-----------------------------------------------------------------------------------------------------------------
                         If LastEventTime = 0 Then
                             LastEventTime = ShowT(ShowIndex).TimeBefore
                         Else
@@ -417,11 +469,21 @@ Public Class fShow
                     Units(UnitNumber).Msg.Unit = UnitNumber
 
 
-
+                    '--------------------------------------------------------------------------------------------------------
                     ' NOTE This logis has been set up for 16 pin field modules.  It needs to be expanded to work
                     '    with newer modules with more ports and more memory.
+                    '
                     'For newer 32 bit units with expanded memory, the messages may be up to 255 characters each.
                     '    so the logic must be changed to support these additioonal designs
+                    '--------------------------------------------------------------------------------------------------------
+
+
+                    '----------------------------------------------------------------------------------
+                    'NOTE:  Seq and Next Seq from ShowT(k) refer to positions in the database
+                    '       These values need to be resolved into values for the field unit modules.
+                    '----------------------------------------------------------------------------------
+
+                    Dim Sequence As Integer = 2
 
 
                     ' Write first 8 events in this message
@@ -433,7 +495,14 @@ Public Class fShow
                         l = Len(ShowT(k).TimeBefore)
                         WU.MS = Mid$("00000000" & ShowT(k).TimeBefore, l + 1)
                         WU.Cue = ShowT(k).CueNumber
-                        WU.NextSeq = ShowT(k).NextSequence
+                        'WU.NextSeq = ShowT(k).NextSequence
+                        If (Val(ShowT(k).NextSequence)) > 0 Then
+                            WU.NextSeq = Sequence
+                        Else
+                            WU.NextSeq = "000"
+                        End If
+                        Sequence = Sequence + 1
+
                         Units(UnitNumber).Msg.AddWU(WU.TWorkUnit)
                     Next
                     Units(UnitNumber).Msg.BumpSendNumber()
@@ -477,7 +546,13 @@ Public Class fShow
                             WU.MS = Mid$("00000000" & ShowT(k).TimeBefore, l + 1)
                             WU.Cue = ShowT(k).CueNumber
                             'WU.Seq = ShowT(k).Sequence
-                            WU.NextSeq = ShowT(k).NextSequence
+                            ' WU.NextSeq = ShowT(k).NextSequence
+                            If (Val(ShowT(k).NextSequence)) > 0 Then
+                                WU.NextSeq = Sequence
+                            Else
+                                WU.NextSeq = "000"
+                            End If
+                            Sequence = Sequence + 1
                             Units(UnitNumber).Msg.AddWU(WU.TWorkUnit)
                         Next
                         Units(UnitNumber).Msg.BumpSendNumber()
@@ -513,7 +588,7 @@ Public Class fShow
 
         'cueptr = number of cues
         'cues has a list of cues
-        UpdateDatabase.Visible = False
+        UpdateDatabase.Visible = True
         'GetUnitStatus()
 
 
@@ -525,6 +600,8 @@ Public Class fShow
         BuildCueButtons(cueptr)
 
         TextBox2.Text = "Done"
+        TextBox2.ForeColor = Color.White
+        TextBox2.BackColor = Color.Green
         Elapsed = StopWatch.ElapsedTime()
         StopWatch.ReportToConsole("Total Program Time = ")
         'fTrace.Show()
@@ -533,11 +610,12 @@ Public Class fShow
 
         CommPort.ReadTOT = tot
         LastUnit = UnitIndex
-        Arm.Visible = True
 
 
-        MsgBox("Dont forget to save show and sety default show!!!!!!")
 
+
+
+        Me.SaveShow.Visible = True
     End Sub
 
     Sub BuildCueButtons(ByVal CueIndex As Integer)
@@ -591,10 +669,6 @@ Public Class fShow
 
         ShowTime = 0
 
-
-       
-
-
         CUE = Mid$(name.text, 5)
         Comd.TriggerCue(CUE)
 
@@ -625,6 +699,8 @@ Public Class fShow
         Dim UnitNumber As Integer
         Dim Command As New cCommand
 
+        TextBox2.ForeColor = Color.White
+        TextBox2.BackColor = Color.Red
         TextBox2.Text = "Saving Show in EEPROM Slot"
 
         For i = 1 To UnitIndex - 1
@@ -637,6 +713,11 @@ Public Class fShow
                 LongWait(150)
             End If
         Next
+        TextBox2.ForeColor = Color.White
+        TextBox2.BackColor = Color.Green
+
+        Me.SaveShow.Visible = False
+        Me.SetDefaultShow.Visible = True
     End Sub
     Sub StartFieldModules()
         Dim i As Integer
@@ -663,6 +744,7 @@ Public Class fShow
     Private Sub Arm_Click(sender As System.Object, e As System.EventArgs) Handles Arm.Click
         Dim i As Integer
         Dim command As New cCommand
+        Dim Net = New cPollNetwork
 
         TextBox2.Text = "Building Cue Buttons.  Please wait"
         'fClock.Show()
@@ -716,6 +798,7 @@ Public Class fShow
         TextBox2.BackColor = Color.Red
         DataGridView1.Visible = False
 
+
         Application.DoEvents()
 
     End Sub
@@ -730,6 +813,10 @@ Public Class fShow
 
         Dim Command As New cCommand
         Dim i As Integer
+        Dim Net As New cPollNetwork
+
+        Me.ProgModules.Visible = False
+
 
         If SIMULATE = False Then
             StartFieldModules()
@@ -764,7 +851,7 @@ Public Class fShow
 
         TextBox2.Text = "Loading Stored Show in Modules.   WAIT......"
         For i = 1 To 2
-            TextBox2.BackColor = Color.Red
+            TextBox2.ForeColor = Color.Red
             Application.DoEvents()
             Thread.Sleep(500)
 
@@ -776,6 +863,9 @@ Public Class fShow
         TextBox2.Text = "Ready to Arm show."
         TextBox2.BackColor = Color.Green
         TextBox2.ForeColor = Color.White
+
+        'Net.PollNetwork()
+
         Arm.Show()
 
     End Sub
@@ -852,10 +942,12 @@ Public Class fShow
 
 
 
-
-
+        '---------------------------------------------------------------------------------------------------------
+        ' Process DataGridView and build sorted events for each Cue to display on scheen
+        '
         ' Walk through DataGridView1, when Cue found, run the NextSeq chain  and add data to array this Cue.
         ' When all cues have been processed, sort the array into Time sequence.
+        '-------------------------------------------------------------------------------------------------------
 
         NumberOfRows = DataGridView1.RowCount
         ' temp fix
@@ -1091,7 +1183,10 @@ Public Class fShow
         Dim i As Integer
         Dim UnitNumber As Integer
         Dim Command As New cCommand
+        Dim Net As New cPollNetwork
 
+        TextBox2.ForeColor = Color.White
+        TextBox2.BackColor = Color.Red
         TextBox2.Text = "Setting Default Show"
 
         For i = 1 To MAXNODES
@@ -1106,6 +1201,15 @@ Public Class fShow
 
         Next i
 
+        ' Net.PollNetwork()
+
+        TextBox2.Text = "Ready to Arm show."
+        TextBox2.BackColor = Color.Green
+        TextBox2.ForeColor = Color.White
+        Arm.ForeColor = Color.Red
+
+        Me.SetDefaultShow.Visible = False
+        Arm.Visible = True
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click

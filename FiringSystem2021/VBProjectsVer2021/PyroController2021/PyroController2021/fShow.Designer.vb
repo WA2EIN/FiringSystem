@@ -28,20 +28,6 @@ Partial Class fShow
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Arm = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ShowEventsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ShowDatabaseDataSet = New PyroController2014.ShowDatabaseDataSet()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ShowEventsTableAdapter = New PyroController2014.ShowDatabaseDataSetTableAdapters.ShowEventsTableAdapter()
-        Me.UpdateDatabase = New System.Windows.Forms.Button()
-        Me.ProgModules = New System.Windows.Forms.Button()
-        Me.SaveShow = New System.Windows.Forms.Button()
-        Me.SetDefaultShow = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ActivateModules = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.PortsViewButton = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.SeqDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ShowIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ModuleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -61,6 +47,20 @@ Partial Class fShow
         Me.CaliberNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CaliberNumericDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ShowEventsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ShowDatabaseDataSet = New PyroController2014.ShowDatabaseDataSet()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ShowEventsTableAdapter = New PyroController2014.ShowDatabaseDataSetTableAdapters.ShowEventsTableAdapter()
+        Me.UpdateDatabase = New System.Windows.Forms.Button()
+        Me.ProgModules = New System.Windows.Forms.Button()
+        Me.SaveShow = New System.Windows.Forms.Button()
+        Me.SetDefaultShow = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ActivateModules = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PortsViewButton = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShowEventsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ShowDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,122 +105,6 @@ Partial Class fShow
         Me.DataGridView1.RowTemplate.Height = 24
         Me.DataGridView1.Size = New System.Drawing.Size(874, 426)
         Me.DataGridView1.TabIndex = 4
-        '
-        'ShowEventsBindingSource
-        '
-        Me.ShowEventsBindingSource.DataMember = "ShowEvents"
-        Me.ShowEventsBindingSource.DataSource = Me.ShowDatabaseDataSet
-        '
-        'ShowDatabaseDataSet
-        '
-        Me.ShowDatabaseDataSet.DataSetName = "ShowDatabaseDataSet"
-        Me.ShowDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(901, 63)
-        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(56, 21)
-        Me.ComboBox1.TabIndex = 5
-        '
-        'ShowEventsTableAdapter
-        '
-        Me.ShowEventsTableAdapter.ClearBeforeFill = True
-        '
-        'UpdateDatabase
-        '
-        Me.UpdateDatabase.Location = New System.Drawing.Point(9, 469)
-        Me.UpdateDatabase.Margin = New System.Windows.Forms.Padding(2)
-        Me.UpdateDatabase.Name = "UpdateDatabase"
-        Me.UpdateDatabase.Size = New System.Drawing.Size(56, 19)
-        Me.UpdateDatabase.TabIndex = 6
-        Me.UpdateDatabase.Text = "Update"
-        Me.UpdateDatabase.UseVisualStyleBackColor = True
-        '
-        'ProgModules
-        '
-        Me.ProgModules.Location = New System.Drawing.Point(899, 95)
-        Me.ProgModules.Margin = New System.Windows.Forms.Padding(2)
-        Me.ProgModules.Name = "ProgModules"
-        Me.ProgModules.Size = New System.Drawing.Size(89, 34)
-        Me.ProgModules.TabIndex = 7
-        Me.ProgModules.Text = "Program  Modules"
-        Me.ProgModules.UseVisualStyleBackColor = True
-        '
-        'SaveShow
-        '
-        Me.SaveShow.Location = New System.Drawing.Point(899, 134)
-        Me.SaveShow.Margin = New System.Windows.Forms.Padding(2)
-        Me.SaveShow.Name = "SaveShow"
-        Me.SaveShow.Size = New System.Drawing.Size(89, 38)
-        Me.SaveShow.TabIndex = 8
-        Me.SaveShow.Text = "Save Show in Modules"
-        Me.SaveShow.UseVisualStyleBackColor = True
-        '
-        'SetDefaultShow
-        '
-        Me.SetDefaultShow.Location = New System.Drawing.Point(899, 177)
-        Me.SetDefaultShow.Margin = New System.Windows.Forms.Padding(2)
-        Me.SetDefaultShow.Name = "SetDefaultShow"
-        Me.SetDefaultShow.Size = New System.Drawing.Size(89, 53)
-        Me.SetDefaultShow.TabIndex = 9
-        Me.SetDefaultShow.Text = "Set Default Show in Modules" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.SetDefaultShow.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(900, 37)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 13)
-        Me.Label1.TabIndex = 12
-        Me.Label1.Text = "Show #"
-        '
-        'ActivateModules
-        '
-        Me.ActivateModules.Location = New System.Drawing.Point(899, 235)
-        Me.ActivateModules.Margin = New System.Windows.Forms.Padding(2)
-        Me.ActivateModules.Name = "ActivateModules"
-        Me.ActivateModules.Size = New System.Drawing.Size(89, 53)
-        Me.ActivateModules.TabIndex = 13
-        Me.ActivateModules.Text = "Activate Modules Stored Show"
-        Me.ActivateModules.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 12)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 13)
-        Me.Label2.TabIndex = 14
-        Me.Label2.Text = "Show"
-        '
-        'PortsViewButton
-        '
-        Me.PortsViewButton.Location = New System.Drawing.Point(424, 4)
-        Me.PortsViewButton.Margin = New System.Windows.Forms.Padding(2)
-        Me.PortsViewButton.Name = "PortsViewButton"
-        Me.PortsViewButton.Size = New System.Drawing.Size(77, 29)
-        Me.PortsViewButton.TabIndex = 15
-        Me.PortsViewButton.Text = "Ports View"
-        Me.PortsViewButton.UseVisualStyleBackColor = True
-        '
-        'Timer1
-        '
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(518, 2)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(74, 31)
-        Me.Button1.TabIndex = 16
-        Me.Button1.Text = "Clock Toggle"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'SeqDataGridViewTextBoxColumn
         '
@@ -335,6 +219,124 @@ Partial Class fShow
         Me.ItemNumberDataGridViewTextBoxColumn.DataPropertyName = "ItemNumber"
         Me.ItemNumberDataGridViewTextBoxColumn.HeaderText = "ItemNumber"
         Me.ItemNumberDataGridViewTextBoxColumn.Name = "ItemNumberDataGridViewTextBoxColumn"
+        '
+        'ShowEventsBindingSource
+        '
+        Me.ShowEventsBindingSource.DataMember = "ShowEvents"
+        Me.ShowEventsBindingSource.DataSource = Me.ShowDatabaseDataSet
+        '
+        'ShowDatabaseDataSet
+        '
+        Me.ShowDatabaseDataSet.DataSetName = "ShowDatabaseDataSet"
+        Me.ShowDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(901, 63)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(56, 21)
+        Me.ComboBox1.TabIndex = 5
+        '
+        'ShowEventsTableAdapter
+        '
+        Me.ShowEventsTableAdapter.ClearBeforeFill = True
+        '
+        'UpdateDatabase
+        '
+        Me.UpdateDatabase.Location = New System.Drawing.Point(9, 469)
+        Me.UpdateDatabase.Margin = New System.Windows.Forms.Padding(2)
+        Me.UpdateDatabase.Name = "UpdateDatabase"
+        Me.UpdateDatabase.Size = New System.Drawing.Size(56, 19)
+        Me.UpdateDatabase.TabIndex = 6
+        Me.UpdateDatabase.Text = "Update"
+        Me.UpdateDatabase.UseVisualStyleBackColor = True
+        '
+        'ProgModules
+        '
+        Me.ProgModules.Location = New System.Drawing.Point(899, 95)
+        Me.ProgModules.Margin = New System.Windows.Forms.Padding(2)
+        Me.ProgModules.Name = "ProgModules"
+        Me.ProgModules.Size = New System.Drawing.Size(89, 34)
+        Me.ProgModules.TabIndex = 7
+        Me.ProgModules.Text = "Program  Modules"
+        Me.ProgModules.UseVisualStyleBackColor = True
+        '
+        'SaveShow
+        '
+        Me.SaveShow.Location = New System.Drawing.Point(899, 134)
+        Me.SaveShow.Margin = New System.Windows.Forms.Padding(2)
+        Me.SaveShow.Name = "SaveShow"
+        Me.SaveShow.Size = New System.Drawing.Size(89, 38)
+        Me.SaveShow.TabIndex = 8
+        Me.SaveShow.Text = "Save Show in Modules"
+        Me.SaveShow.UseVisualStyleBackColor = True
+        Me.SaveShow.Visible = False
+        '
+        'SetDefaultShow
+        '
+        Me.SetDefaultShow.Location = New System.Drawing.Point(899, 177)
+        Me.SetDefaultShow.Margin = New System.Windows.Forms.Padding(2)
+        Me.SetDefaultShow.Name = "SetDefaultShow"
+        Me.SetDefaultShow.Size = New System.Drawing.Size(89, 53)
+        Me.SetDefaultShow.TabIndex = 9
+        Me.SetDefaultShow.Text = "Set Default Show in Modules" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.SetDefaultShow.UseVisualStyleBackColor = True
+        Me.SetDefaultShow.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(900, 37)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(44, 13)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "Show #"
+        '
+        'ActivateModules
+        '
+        Me.ActivateModules.Location = New System.Drawing.Point(899, 235)
+        Me.ActivateModules.Margin = New System.Windows.Forms.Padding(2)
+        Me.ActivateModules.Name = "ActivateModules"
+        Me.ActivateModules.Size = New System.Drawing.Size(89, 53)
+        Me.ActivateModules.TabIndex = 13
+        Me.ActivateModules.Text = "Activate Modules Stored Show"
+        Me.ActivateModules.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(7, 12)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 13)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Show"
+        '
+        'PortsViewButton
+        '
+        Me.PortsViewButton.Location = New System.Drawing.Point(424, 4)
+        Me.PortsViewButton.Margin = New System.Windows.Forms.Padding(2)
+        Me.PortsViewButton.Name = "PortsViewButton"
+        Me.PortsViewButton.Size = New System.Drawing.Size(77, 29)
+        Me.PortsViewButton.TabIndex = 15
+        Me.PortsViewButton.Text = "Ports View"
+        Me.PortsViewButton.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(518, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(74, 31)
+        Me.Button1.TabIndex = 16
+        Me.Button1.Text = "Clock Toggle"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'fShow
         '

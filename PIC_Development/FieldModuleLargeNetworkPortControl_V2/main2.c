@@ -2330,7 +2330,7 @@ void LoadShow(void)
         //Dump((char*) &ShowBegin,Len);
         memset(ShowType,'T',1);
         EndOfWorkQueue = 0;
-        //sprintf(&ShowLoaded,"%1d",intPort);
+        sprintf(&ShowLoaded,"%1d",intPort);
         
     }
 
