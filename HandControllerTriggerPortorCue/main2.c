@@ -348,7 +348,7 @@ ram char             Show1[]       = "001";
 ram char             Show2[]       = "002";
 ram char             Show3[]       = "003";
 ram char             ToLoad[]      = "001"; 
-ram char             StartingMsg[] = "Ver 09/04/14   ";
+ram char             StartingMsg[] = "Ver 02/13/22   ";
 ram char             Offline[]     = "No Units Active";
 ram char             CommandMsg[]  = "Cmd L|A|S|T|D ?";
 ram char             LoadShowMsg[] = "Loading Show";
@@ -381,7 +381,7 @@ void main(void)
 
    LCDClear();
    WriteOLED(StartingMsg);
-   DelayMS(1000);
+   DelayMS(5000);
    LCDClear();
 
    GlobalReset();
@@ -389,7 +389,7 @@ void main(void)
    WriteOLED(ReadyingMsg);
 
    // Poll Network
-   DelayMS(500);
+   DelayMS(1000);
 
 
    // Allow 5 resties to start network.
@@ -980,7 +980,7 @@ void GlobalReset(void)
    strcat(FullMsg,cdigit); 
    Broadcast(FullMsg);
    ResetLEDs();
-   DelayMS(50);
+   DelayMS(100);
 
 }
 
@@ -1037,13 +1037,16 @@ void FastPoll(void)
             // Retrieve Address, Virtual Adress, Show Loaded, Voltage
 
             memset(UnitData[UnitIndex].Status.Addr,'\0',sizeof(UnitData[UnitIndex].Status.Addr));
-            memcpy(UnitData[UnitIndex].Status.Addr,(void *)RadioReply+17,3);
+            //memcpy(UnitData[UnitIndex].Status.Addr,(void *)RadioReply+17,3);
+            memcpy(UnitData[UnitIndex].Status.Addr,(void *)RadioReply+15,3);
             memset(UnitData[UnitIndex].Status.VAddr,'\0',sizeof(UnitData[UnitIndex].Status.VAddr));
-            memcpy(UnitData[UnitIndex].Status.VAddr,(void *)RadioReply+20,3);
+            //memcpy(UnitData[UnitIndex].Status.VAddr,(void *)RadioReply+20,3);
+            memcpy(UnitData[UnitIndex].Status.VAddr,(void *)RadioReply+18,3);
             memset(UnitData[UnitIndex].Status.Show,'\0',sizeof(UnitData[UnitIndex].Status.Show));
             memcpy(UnitData[UnitIndex].Status.Show,(void *)RadioReply+12,1);
             memset(UnitData[UnitIndex].Status.Voltage,'\0',sizeof(UnitData[UnitIndex].Status.Voltage));
-            memcpy(UnitData[UnitIndex].Status.Voltage,(void *)RadioReply+13,4);
+           // memcpy(UnitData[UnitIndex].Status.Voltage,(void *)RadioReply+13,4);
+            memcpy(UnitData[UnitIndex].Status.Voltage,(void *)RadioReply+13,2);
             UnitData[UnitIndex].SlowPollDelay = ComputedDelay;
             ComputedDelay += 70;
             UnitIndex ++;
@@ -1390,9 +1393,9 @@ void Scroll(void)
       }
       LCDClear();
       memset(WorkMsg,'\0',sizeof(WorkMsg));
-
       memset(StatStr,'\0',sizeof(StatStr));
 
+/*
       if ( !strncmp(UnitData[iUnit].Status.Armed ,k1,1) )
       {
          strcpy(StatStr,ArmedStat);
@@ -1416,9 +1419,13 @@ void Scroll(void)
          sprintf(WorkMsg,(const far rom char *) "U%s %s%s",UnitData[iUnit].Status.Addr,StatStr,CRLF);
 
       }
+*/
 
+	  strcpy(StatStr,UnitData[iUnit].Status.Voltage);
+	  sprintf(WorkMsg,(const far rom char *) "U%s %s%s",UnitData[iUnit].Status.Addr,StatStr,CRLF);
 
       WriteOLED(WorkMsg);
+
       memset(WorkMsg,'\0',sizeof(WorkMsg));
       memcpy((void *)WorkMsg,(void *)UnitData[iUnit].Status.Port,16);
       WriteOLED(WorkMsg);           

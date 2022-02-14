@@ -1,5 +1,3 @@
-Warning[2066] C:\Users\pete\Desktop\Development\FiringSystemDdevelopment\PIC\HandControllerTriggerPortorCue\main2.c 1072 : type qualifier mismatch in assignment
-Warning[2066] C:\Users\pete\Desktop\Development\FiringSystemDdevelopment\PIC\HandControllerTriggerPortorCue\main2.c 1077 : type qualifier mismatch in assignment
-Warning[2054] C:\Users\pete\Desktop\Development\FiringSystemDdevelopment\PIC\HandControllerTriggerPortorCue\main2.c 1396 : suspicious pointer conversion
-Warning[2054] C:\Users\pete\Desktop\Development\FiringSystemDdevelopment\PIC\HandControllerTriggerPortorCue\main2.c 1405 : suspicious pointer conversion
-Warning[2066] C:\Users\pete\Desktop\Development\FiringSystemDdevelopment\PIC\HandControllerTriggerPortorCue\main2.c 1503 : type qualifier mismatch in assignment
+Warning[2066] C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\HandControllerTriggerPortorCue\main2.c 1075 : type qualifier mismatch in assignment
+Warning[2066] C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\HandControllerTriggerPortorCue\main2.c 1080 : type qualifier mismatch in assignment
+Warning[2066] C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\HandControllerTriggerPortorCue\main2.c 1510 : type qualifier mismatch in assignment

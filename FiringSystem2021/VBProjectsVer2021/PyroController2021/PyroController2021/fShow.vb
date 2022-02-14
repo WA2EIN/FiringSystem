@@ -3,6 +3,7 @@ Imports System
 Imports System.IO.Ports
 Imports System.Threading
 Imports System.Math
+Imports WMPLib
 
 
 #Const MAXEVENTS = 999

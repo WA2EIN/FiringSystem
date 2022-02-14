@@ -1,0 +1,10 @@
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\bin\Release\CommTrace.exe
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\bin\Release\CommTrace.pdb
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\bin\Release\CommTrace.xml
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\WindowsApplication1.MainForm.resources
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\WindowsApplication1.Resources.resources
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\CommTrace.vbproj.GenerateResource.Cache
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\CommTrace.exe
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\CommTrace.xml
+C:\Users\Peter\Dropbox\FiringSystemDdevelopment\VBProjects\CommTrace\CommTrace\Backup\obj\Release\CommTrace.pdb
