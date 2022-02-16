@@ -3,7 +3,6 @@ Imports System
 Imports System.IO.Ports
 Imports System.Threading
 Imports System.Math
-Imports WMPLib
 
 
 #Const MAXEVENTS = 999
@@ -89,11 +88,13 @@ Public Class fShow
         End If
 
 
+
     End Sub
     Private Sub ShowForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim Net = New cPollNetwork
         Dim unit As String
         Dim port As String
+
 
         If Simple = True Then
             CueButLocX = 60
@@ -112,9 +113,12 @@ Public Class fShow
             End If
         End If
 
+
+
         ' IF this is not a CSV file conversion then load from database
         If DatabaseDataHighIndex = 0 Then
             ' Fill DATAGRIDVIEW FROM DATABASE
+            Me.ShowEventsTableAdapter.ClearBeforeFill = True
             Me.ShowEventsTableAdapter.FillBy(Me.ShowDatabaseDataSet.ShowEvents, ShowID)
 
             ' Sort Ascending on Seq field
@@ -171,6 +175,8 @@ Public Class fShow
 
 
         NumberOfRows = DataGridView1.Rows.Count
+
+
 
 
 
@@ -235,6 +241,10 @@ Public Class fShow
         Dim cue As Integer
         Dim StopWatch As New cStopWatch
         Dim Net = New cPollNetwork
+
+        For i = 1 To MAXNODES
+            UnitArray(i) = ""
+        Next
 
         LastEventTime = 0
         cueptr = 0
@@ -585,12 +595,10 @@ Public Class fShow
 
 
 
-        cueptr = cueptr + 1
 
         'cueptr = number of cues
         'cues has a list of cues
         UpdateDatabase.Visible = True
-        'GetUnitStatus()
 
 
         ' PATCH
@@ -752,7 +760,7 @@ Public Class fShow
 
         ' Arm Active Units with Unit Arm commands
 
-        For i = 1 To cueptr
+        For i = 1 To cueptr - 1
             BuildCueButtons(i)
         Next
 

@@ -248,9 +248,7 @@ Public Class fMain
 
     End Sub
 
-    Private Sub CreateShowToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CreateShowToolStripMenuItem.Click
-        fCreateShow.Show()
-    End Sub
+   
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox3.SelectedIndexChanged
 
@@ -259,4 +257,6 @@ Public Class fMain
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         ListBox1.Items.Clear()
     End Sub
+
+    
 End Class

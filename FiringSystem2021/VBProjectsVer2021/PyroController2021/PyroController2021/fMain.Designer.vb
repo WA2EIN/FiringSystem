@@ -39,7 +39,6 @@ Partial Class fMain
         Me.ManualFireToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadShowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreateShowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestGPSCalculationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadCSVToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -146,7 +145,7 @@ Partial Class fMain
         '
         'ShowToolStripMenuItem
         '
-        Me.ShowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadShowToolStripMenuItem, Me.CreateShowToolStripMenuItem})
+        Me.ShowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadShowToolStripMenuItem})
         Me.ShowToolStripMenuItem.Name = "ShowToolStripMenuItem"
         Me.ShowToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ShowToolStripMenuItem.Text = "Show"
@@ -154,14 +153,8 @@ Partial Class fMain
         'LoadShowToolStripMenuItem
         '
         Me.LoadShowToolStripMenuItem.Name = "LoadShowToolStripMenuItem"
-        Me.LoadShowToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.LoadShowToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.LoadShowToolStripMenuItem.Text = "Load Show"
-        '
-        'CreateShowToolStripMenuItem
-        '
-        Me.CreateShowToolStripMenuItem.Name = "CreateShowToolStripMenuItem"
-        Me.CreateShowToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
-        Me.CreateShowToolStripMenuItem.Text = "Create Show"
         '
         'TestGPSCalculationsToolStripMenuItem
         '
@@ -247,7 +240,6 @@ Partial Class fMain
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
     Friend WithEvents CleanRegistryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents QuieryBuildDateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CreateShowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

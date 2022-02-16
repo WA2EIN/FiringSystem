@@ -105,7 +105,6 @@ C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjects
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fCSVImport.resources
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fLoadTestcase.resources
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fManualFire.resources
-C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fCreateShow.resources
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fQueryBuildDate.resources
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fVoltage.resources
 C:\Users\pete\OneDrive\Documents\GitHub\FiringSystem\FiringSystem2021\VBProjectsVer2021\PyroController2021\PyroController2021\obj\x86\Release\PyroController2014.fPortsView.resources

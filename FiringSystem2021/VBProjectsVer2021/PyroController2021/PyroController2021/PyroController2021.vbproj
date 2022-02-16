@@ -160,12 +160,6 @@
     <Compile Include="fClock.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fCreateShow.Designer.vb">
-      <DependentUpon>fCreateShow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="fCreateShow.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="fQueryBuildDate.Designer.vb">
       <DependentUpon>fQueryBuildDate.vb</DependentUpon>
     </Compile>
@@ -313,9 +307,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fManualFire.resx">
       <DependentUpon>fManualFire.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fCreateShow.resx">
-      <DependentUpon>fCreateShow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fQueryBuildDate.resx">
       <DependentUpon>fQueryBuildDate.vb</DependentUpon>
