@@ -200,6 +200,12 @@ Public Class cComm
         WriteVarString(Msg)
         LongWait(25 + NetworkLatency)
     End Sub
+    Public Sub BroadcastReset(ByVal Msg As String)
+        WriteHardReset(Msg)
+        LongWait(25 + NetworkLatency)
+    End Sub
+
+
     Public Function ReadString(ByVal Len As Integer) As String
         While (True)
             Try
@@ -335,6 +341,48 @@ Public Class cComm
 
         If TimerStarted Then fMain.Timer1.Enabled = True
     End Sub
+
+    Public Sub WriteHardReset(ByVal Msg As String)
+        Dim Message As New SerialMsg
+
+        If TimerStarted Then fMain.Timer1.Enabled = False
+        Message.Length = Len(Msg)
+
+        Message.Msg = StrToByteArray(Msg)
+        Message.Length = Message.Length
+
+        LongWait(NetworkLatency)
+        Try
+            If (_serialPort.BaseStream.CanWrite) Then
+                _serialPort.BaseStream.WriteByte(255)
+                _serialPort.BaseStream.WriteByte(255)
+                _serialPort.BaseStream.WriteByte(255)
+                _serialPort.BaseStream.WriteByte(255)
+                _serialPort.BaseStream.WriteByte(255)
+                _serialPort.BaseStream.WriteByte(Message.Length)
+                _serialPort.Write(Message.Msg, 0, Len(Msg))
+
+                Traceit("==>" & Msg)
+            Else
+                fMain.ListBox1.Items.Add("  ************************Cant write")
+            End If
+        Catch
+            If ErrorPosted = False Then
+                ErrorPosted = True
+                MsgBox("Comm Port not active")
+                End
+            End If
+
+        End Try
+
+        Application.DoEvents()
+
+        If TimerStarted Then fMain.Timer1.Enabled = True
+    End Sub
+
+
+
+
     Private Sub ParseReply()
 
         Try

@@ -64,19 +64,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XofsRbOnS+H/5ywGW3rXX+H8WmE=</dsig:DigestValue>
+        <dsig:DigestValue>rGL/DWLMMJY58OwEracZRALfT6I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PyroController2021.exe" size="385024">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PyroController2021.exe" size="385536">
       <assemblyIdentity name="PyroController2021" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>uAvwPJCCjBNOpSOrjZzenHYN/Tk=</dsig:DigestValue>
+        <dsig:DigestValue>zwGwgZhtj6IWWoS0lOqEiTSvT2E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

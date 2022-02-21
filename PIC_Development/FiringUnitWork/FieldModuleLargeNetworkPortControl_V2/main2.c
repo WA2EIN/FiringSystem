@@ -1,6 +1,7 @@
 #pragma config  OSC=INTIO67,FCMEN=OFF, IESO=OFF, PWRT = ON, BOREN=OFF,   WDT=OFF,  WDTPS=128, MCLRE=ON,  LPT1OSC = OFF,PBADEN=OFF,LVP=OFF, DEBUG=OFF// , CPB=OFF,CP0=OFF,CP1=OFF,CP2=OFF, CPD = OFF
-#define Today "Build Date = 2/13/2022, (C) Peter C Cranwell, 2016"
+#define Today "Build Date = 2/14/2022, (C) Peter C Cranwell, 2016"
 #define MaxPacketLength            213    // Maximum Packet Length
+ram long                  MatchFireTime = 200;
 
 ram int                   MS;
 ram unsigned long         ShowTimeMS; 
@@ -241,9 +242,9 @@ extern int volatile NQueue;
 
 
 ///////////////////////// Module Configuration  /////////////////////////
-#define MYADDR                  "504"
+#define MYADDR                  "302"
 #define NumPorts                16          
-RAM char				        cNumPorts[4] = "016"; 	
+RAM char                        cNumPorts[4] = "016";   
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -276,7 +277,7 @@ RAM char				        cNumPorts[4] = "016";
 
 #define DefaultTOT              290         // Receive TOT MS
 #define TEventTOT               50          // TEvent Message Polling Time
-#define DeadManCount            90          // 15 Sec at Default TOT = 300 MS   (One count every 10 TOT)
+#define DeadManCount            180         // 15 Sec at Default TOT = 300 MS   (One count every 10 TOT)
 #define Out                     1  
 #define In                      2
 #define TO                      3
@@ -327,7 +328,7 @@ int  GetDefaultShow(void);
 void Dump (char *Start, int Len);
 int  GetNextTEventDelay(void);
 void AllPinsOff(void);
-int  GetCue(int Port);
+int  GetPortAddress(int Port);
 void Fire(int Port);
 int PinTest(int Port);
 void SetSessionStatus(unsigned char Status);
@@ -386,8 +387,8 @@ struct PortControlWorkUnit
 
 struct PortControl
 {
-	unsigned int Area;
-	unsigned int Caliber;
+    unsigned int Area;
+    unsigned int Caliber;
     unsigned int Item;
 };
 
@@ -403,8 +404,8 @@ struct TEvent
 
 struct PortControl
 {
-	unsigned int Area;
-	unsigned int Caliber;
+    unsigned int Area;
+    unsigned int Caliber;
     unsigned int Item;
 };
 
@@ -529,7 +530,7 @@ RAM char                  ACKmsg[3]             = "07";
 RAM char                  NAKmsg[3]             = "08";
 RAM char                  HostAddr[4]           = "001";  
 RAM char                  ThisUnit[4]           = MYADDR;
-RAM char				  ThisLogicalAddr[4]    = MYADDR; 	
+RAM char                  ThisLogicalAddr[4]    = MYADDR;   
 RAM char                  LastUnit[4]           = "";
 RAM char                  TempUnit[4]           = "\0"; 
 RAM char                  CRLF[3]               ="\r\n";
@@ -595,7 +596,6 @@ RAM char                  TEventParameterEnd;
 RAM int                   IgnoreIgnore;
 RAM char                  SeqTable[17][4] ={ "  ", "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015","016"};
 
-RAM long                  MatchFireTime = 50;
 RAM int                   NoMsgNumberIncrement = FALSE;
 RAM int                   BlipCtr;
 RAM int                   LastFire;
@@ -616,10 +616,10 @@ RAM char                  Unit[4] = "";
 RAM char                  Port[4] = "";  
 RAM char                  Now[9]  = "00000000";
 RAM int                   ReturnStatus = 0; 
-RAM int  				  AnyPinOn = 0;
+RAM int                   AnyPinOn = 0;
 RAM int                   PollDelay;
 RAM long                  SlowPollDelay;
-RAM char 				  LogicalUnit[4];
+RAM char                  LogicalUnit[4];
 RAM char                  NetworkTopology[28];
 RAM int                   ResponseDelay;
 RAM int                   iThisUnit; 
@@ -635,6 +635,8 @@ union
     struct WorkUnit WorkMessage;
 }  WrkUnit;
 
+
+// Translate port # to Hardware address
 RAM char Cues[17] = {0,7,9,10,11,12,13,14,15,16,21,22,23,24,25,26,27};
 
 
@@ -655,7 +657,7 @@ RAM long ClockTime;
 RAM int  Running = FALSE;
 RAM int  fPaused;
 RAM int  iPort, iArea, iCaliber, iItem, l;
-extern int	 volatile iStarting; 	
+extern int   volatile iStarting;    
 
 
 
@@ -673,22 +675,23 @@ void main(void)
 
     WDTCON = 0;
 
-      
+
     //Set All required ports to I/O
     // Set A/N Chan 0
     ADCON0 = 0x01;           // Channel 0 AN0
     ADCON1 = 0x0E;           // All RA0 = Analog, RA1:7 Digital
     TRISA  = 0x01;           // RA0 = Input
     ADCON2 = 0xDF;           // Right Justified, 20TAD, A/D Clock
-   
+
 
     Pin5LOW();
 
-    TRC = FALSE;   // Set Internal 8 MHZ Clock
-    SetClockSpeed(8);
+    TRC = FALSE;
+    //TRC = TRUE;   
+    SetClockSpeed(8);    // Set Internal 8 Mhz Clock
     CloseSPI();
     ClosePORTB();
-   
+
     OpenUART(); 
     OpenUSARTpic18f2525(38400);      // Hardware UART for RS-485
 
@@ -698,53 +701,54 @@ void main(void)
     QHead = 0;    // Qhead is incremented before first read is returned.
     NQueue = 0;
 
-	QHead = 0;
+    QHead = 0;
     QTail = 0;
     memset((char *)Buffer,'\0',sizeof(Buffer));
 
- 
+
+   
     ResetSlave();
-	GetUnitAddr();
+    GetUnitAddr();
     GetLogicalAddr();
     Running = TRUE;
     iStarting = TRUE;
 
 
     //ShowAddressAndSoftwareVersion();
- 
 
 
-	Trace(Starting,None);
+
+    Trace(Starting,None);
 
 
-   
-     
 
-    
-   
+
+
+
+
     while (TRUE)
     {
 
         Blip();    // Generate Arming Pulse on Pin 3. 8MHZ clock & loop results in
                    // 2MS square wave on Pin3
 
-       
+
         ShowTimeMS = GetTimeMS();
-        
+
 
         if (DeadManCounter > DeadManCount)
         {
 
-               Armed = FALSE;
-               Pin6LOW();        // Turn Off Arming Circuit
-               fArm = FALSE;
-               SetArmedStatus('D');
-               CloseTimer0();
-               CloseTimer1(); 
-               memset((char *)Message,'\0',sizeof(Message));
-               ClockStarted = FALSE;
-               ResetSlave();
-            continue;
+            Armed = FALSE;
+            Pin6LOW();        // Turn Off Arming Circuit
+            fArm = FALSE;
+            SetArmedStatus('D');
+            CloseTimer0();
+            CloseTimer1(); 
+            memset((char *)Message,'\0',sizeof(Message));
+            ClockStarted = FALSE;
+            ResetSlave();
+            continue;     // continue main loop
         }
 
 
@@ -754,7 +758,7 @@ void main(void)
         if (RecResult > 0)
         {
 
-           
+
             iStarting = FALSE;
 
             // Disable Watchdog timer when message is received 
@@ -764,15 +768,15 @@ void main(void)
 
             // Copy message type from header to allow "strstr" on just header data
             memset(MessageType,'\0',sizeof(MessageType));
-            if(ProgrammingActive == FALSE)
+            if (ProgrammingActive == FALSE)
             {
                 // Message Type contains 8 bytes of Message Header containing Module Address, Op Code and Port Address.
                 memcpy((void *)MessageType, (void *) Message+3,8);
-            } 
+            }
             memset(LogicalUnit,'\0',sizeof(LogicalUnit));
             memcpy((void *)LogicalUnit, (void *) Message+12,3);
 
-            
+
 
             // Get message Check Code
             Ccode2 = atoi(Message+RecResult-1);
@@ -783,12 +787,12 @@ void main(void)
 
             if ( Ccode != Ccode2)
             {
-               
+
                 memset((char *)Message,'\0',sizeof(Message));
                 memset(MessageType,'\0',sizeof(MessageType));
 
                 // If check code is incorrect, do not process it
-                continue;
+                continue;     // continue main loop
             }
 
         }
@@ -809,8 +813,8 @@ void main(void)
                 {
                     // Process Time packet
 
-					 if(ArmPending == TRUE)
-   					 ReArm();
+                    if (ArmPending == TRUE)
+                        ReArm();
 
                     memset((char *)Message+19,'\0',1);
                     ClockTime = atol(Message +11);
@@ -821,10 +825,10 @@ void main(void)
                     memset((char *)Message,'\0',sizeof(Message));
 
                     // Adjust TeventTime if next event within 20MS of Time Signal
-					//    to prevent bypassing pending events due to program latency.
+                    //    to prevent bypassing pending events due to program latency.
 
                     if (TEventTimeMS < ShowTimeMS + 20)
-						TEventTimeMS += 20;
+                        TEventTimeMS += 20;
 
                     continue;
                 }
@@ -850,28 +854,28 @@ void main(void)
 //      For example, if AAA and CCC are specified, all field units that have ports
 //      connected to CCC Caliber in Area AAA disable the associated ports.
 ///////////////////////////////////////////////////////////////////////////////////////////
- 
+
 
                 cp = strstr(MessageType,PortDisable);
-                if(cp != NULL)
+                if (cp != NULL)
                 {
-				// Process Disable Port, Parse the message here
-				// Message format is:
-           		// 	
-				// Msg#, #WU, Unit (999), Command(23), Port (999), Area(3),Caliber(3),Item(3)
+                    // Process Disable Port, Parse the message here
+                    // Message format is:
+                    // 	
+                    // Msg#, #WU, Unit (999), Command(23), Port (999), Area(3),Caliber(3),Item(3)
 
-                   memset((char*) Message + 18,'\0',1);
-                   iItem = atoi(Message + 15);
-                   memset((char *) Message + 15,'\0',1);
-                   iCaliber = atoi(Message + 12);
-                   memset((char *) Message + 12,'\0',1);
-                   iArea = atoi(Message + 9);
-                   
-                   // Process message here
-                   // Find all ports that have matching Item, Caliber and Area set.
+                    memset((char*) Message + 18,'\0',1);
+                    iItem = atoi(Message + 15);
+                    memset((char *) Message + 15,'\0',1);
+                    iCaliber = atoi(Message + 12);
+                    memset((char *) Message + 12,'\0',1);
+                    iArea = atoi(Message + 9);
+
+                    // Process message here
+                    // Find all ports that have matching Item, Caliber and Area set.
 
 
-                   continue;
+                    continue;
                 }
             }
 
@@ -881,58 +885,54 @@ void main(void)
             {
 
                 cp = strstr(MessageType,FireCue);
-               // if ((cp != NULL) || (TEventActive == 1))
-               // {
-                  
-                    if (cp != NULL)
+
+                if (cp != NULL)
+                {
+
+                    if (ArmPending == TRUE)
+                        ReArm();
+                    // Fire Cue Message
+                    // Extract Cue number from message
+
+                    memset(WorkArea.WorkString,'\0',sizeof(WorkArea));
+                    strncpy(WorkArea.WorkString,Message,sizeof(WorkArea.WorkString));
+                    memset(WorkArea2,'\0',sizeof(WorkArea2));
+                    memcpy(WorkArea2,(void *)WorkArea.Header.Cue,3);
+                    TEventPtr = atoi(WorkArea2);
+                    CuePtr = 0;
+
+                    // Find Cue in TEvents
+                    for (i=1; i < NumPorts+1; i++)
                     {
-
-                        if(ArmPending == TRUE)
-    			    	ReArm();
-                        // Fire Cue Message
-                        // Extract Cue number from message
-
-                        memset(WorkArea.WorkString,'\0',sizeof(WorkArea));
-                        strncpy(WorkArea.WorkString,Message,sizeof(WorkArea.WorkString));
-                        memset(WorkArea2,'\0',sizeof(WorkArea2));
-                        memcpy(WorkArea2,(void *)WorkArea.Header.Cue,3);
-                        TEventPtr = atoi(WorkArea2);
-                        CuePtr = 0;
-
-                        // Find Cue in TEvents
-                        for (i=1; i < NumPorts+1; i++)
+                        if (atoi(ShowEvents[i].TE.Cue) == TEventPtr)
                         {
-                            if (atoi(ShowEvents[i].TE.Cue) == TEventPtr)
-                            {
-                                CuePtr = i;
-
-                                break;
-                            }
-
+                            CuePtr = i;     // CuePtr has Seq # of Show entry.
+                            break;
                         }
-
-                        if (CuePtr == 0)
-                        {
-                            memset((char *)Message,'\0',sizeof(Message));
-                            continue;
-                        }
-                        // Set Cue fire time and get next event 
-
-                        TEventSeq = atoi(ShowEvents[CuePtr].TE.Seq);
-                        TEventNext = atoi(ShowEvents[CuePtr].TE.NextSeq); 
-                        TEventTimeMS = ShowEvents[CuePtr].TE.EventTimeMS;
-                        // Reset clock time to 0
-                        TimerZero = 1;
-                        StartTimer0();
-                        ClockStarted = TRUE;
-                        ShowTimeMS = 0;
-                        TEventActive = 1;
-                        SetTEventStatus('A');
-                        memset(ShowType,'T',1);
-                        RecResult = 0;
 
                     }
-               // }
+
+                    if (CuePtr == 0)
+                    {
+                        memset((char *)Message,'\0',sizeof(Message));
+                        continue;
+                    }
+                    // Set Cue fire time and get next event 
+
+                    TEventSeq = atoi(ShowEvents[CuePtr].TE.Seq);
+                    TEventNext = atoi(ShowEvents[CuePtr].TE.NextSeq); 
+                    TEventTimeMS = ShowEvents[CuePtr].TE.EventTimeMS;
+                    // Reset clock time to 0
+                    TimerZero = 1;
+                    StartTimer0();
+                    ClockStarted = TRUE;
+                    ShowTimeMS = 0;
+                    TEventActive = 1;
+                    SetTEventStatus('A');
+                    memset(ShowType,'T',1);
+                    RecResult = 0;
+
+                }
 
             }
 
@@ -959,18 +959,21 @@ void main(void)
                     TEventDelay = TEventTimeMS - ShowTimeMS;
 
                     // Adjust for time in loop to prevent bypass for time 0 events
-					// This code prevents Event Times < 20 from firing
-					// This may be incorrect
-                    if(TEventTimeMS < 20)
-                          {
-                          TEventDelay = 0;
-                          ShowTimeMS = 0;
-                          }
-                        
+                    // This code prevents Event Times < 20 from firing
+                    // This may be incorrect
 
 
+/*       2/19/2022   PCC
+                    if (TEventTimeMS < 20)
+                    {
+                        TEventDelay = 0;
+                        ShowTimeMS = 0;
+                    }
 
 
+*/
+
+/* *********************
                     // Bypass all events less than current time
                     // This prevents mass firing events during recovery operation
                     while (TEventDelay < 0)
@@ -979,12 +982,12 @@ void main(void)
 
                         if (TEventDelay < 0)
                         {
+							// Step thru until Event Time > Show Time or until End of Event Chain
                             if (atoi(ShowEvents[CuePtr].TE.NextSeq) > 0 )
                             {
                                 CuePtr = atoi(ShowEvents[CuePtr].TE.NextSeq);
                                 TEventTimeMS = ShowEvents[CuePtr].TE.EventTimeMS;
-                            }
-                            else
+                            } else
                             {
                                 TEventActive = 0;
                                 SetTEventStatus(' ');
@@ -995,6 +998,7 @@ void main(void)
                             } 
                         }
                     } 
+*/  ///////////////////////////////////////////////////////
 
 
 
@@ -1004,38 +1008,32 @@ void main(void)
                     //       else continue looping on Receive
                     if (TEventDelay < TEventTOT)
                     {
-
-
-                        
                         DelayMS((int)TEventDelay);
                         iCue = atoi(ShowEvents[CuePtr].TE.Port);
                         if (ArmPending == TRUE)
-							ReArm(); 
+                            ReArm();
                         Fire(iCue);
-                       
+
                         if (atoi(ShowEvents[CuePtr].TE.NextSeq) > 0 )
                         {
                             CuePtr = atoi(ShowEvents[CuePtr].TE.NextSeq);
                             TEventTimeMS = ShowEvents[CuePtr].TE.EventTimeMS;
                             // Dont Checkpoint on events that are too close in time
-                            if(TEventTimeMS > ShowTimeMS + 100)
-                            CheckpointShowStatus();
-                        }
-                        else
+                          //  if (TEventTimeMS > ShowTimeMS + 100)
+                          //      CheckpointShowStatus();
+                        } else
                         {
-
-
+							// End of Event Chain
                             TEventActive = 0;
                             SetTEventStatus(' ');
                             CuePtr = 0;
                             IgnoreIgnore=1;
                             memset((char *)Message,'\0',sizeof(Message));
-                            continue;
+                            continue;     // continue main loop
 
                         }
 
-                    }
-                    else
+                    } else
                     {
                         break;
                     }
@@ -1043,34 +1041,30 @@ void main(void)
 
             }  // Not a Triggered Show   (This is an obsolete test.  TODO: Remove show type since all shows are Triggered)
 
-        }
-        else
-        {
-
-        }
+        } 
 
 
 
 
-		
+
 
         if (RecResult > 0)
         {
 
 
-			//-----------------------------------------------------------
-			//   Process Show Unit ID broadcast message
-			//-----------------------------------------------------------
+            //-----------------------------------------------------------
+            //   Process Show Unit ID broadcast message
+            //-----------------------------------------------------------
             cp = strstr(MessageType,ShowID);
             if (cp != NULL)
             {
-				ShowAddressAndSoftwareVersion();
+                ShowAddressAndSoftwareVersion();
             }
-    
 
-			//------------------------------------------------------------
-			// Set Unit Address
-			//------------------------------------------------------------
+
+            //------------------------------------------------------------
+            // Set Unit Address
+            //------------------------------------------------------------
 
             // Two consecutive Set Address messages required to set unit address
             cp = strstr(MessageType,SetAddr);
@@ -1085,20 +1079,17 @@ void main(void)
                     GetUnitAddr();
                     ShowUnitAddress();
                     memset((char *)Message,'\0',sizeof(Message));
-                }
-                else
+                } else
                 {
                     strcpy(LastUnit,ThisUnit);
                 } 
 
                 continue;
-            }
-            else
+            } else
             {
                 memset(LastUnit,'\0',sizeof(LastUnit));
             }
-        }
-        else
+        } else
         {
 
             continue;
@@ -1107,81 +1098,81 @@ void main(void)
 
 
 
-		   //------------------------------------------------------------------- 
-           // Logical Unit Fire Port Broadcast message
-		   //-------------------------------------------------------------------
-          
-           cp = strstr(MessageType,LogicalFirePort);
-           if (cp!= NULL)
-           {
-            
-               // If Logic Fire is for this Logical Unit
-              	if (strcmp(LogicalUnit,ThisLogicalAddr) == 0)
-                {	
- 					if(ArmPending == TRUE)
-   					 ReArm();
+        //------------------------------------------------------------------- 
+        // Logical Unit Fire Port Broadcast message
+        //-------------------------------------------------------------------
 
-                   if (Armed == TRUE)
-                   {
-                      memset(Port,'\0',sizeof(Port));
-                      memcpy(Port,(void *)Message + 8,3);  
-                      intPort = atoi(Port); 
-                      Fire(intPort);
-                   }
+        cp = strstr(MessageType,LogicalFirePort);
+        if (cp!= NULL)
+        {
+
+            // If Logic Fire is for this Logical Unit
+            if (strcmp(LogicalUnit,ThisLogicalAddr) == 0)
+            {
+                if (ArmPending == TRUE)
+                    ReArm();
+
+                if (Armed == TRUE)
+                {
+                    memset(Port,'\0',sizeof(Port));
+                    memcpy(Port,(void *)Message + 8,3);  
+                    intPort = atoi(Port); 
+                    Fire(intPort);
                 }
-                continue;
-           }
-	  
-
-		   //------------------------------------------------------------
-           // Check for Global Arm (Broadcast)
-		   //------------------------------------------------------------
-
-           cp = strstr(MessageType,GlobalArm);
-           if (cp!= NULL)
-           {
-               if(fStarted == TRUE)
-               {
-                  Arm();
-               }
-               continue;
-           }
+            }
+            continue;
+        }
 
 
+        //------------------------------------------------------------
+        // Check for Global Arm (Broadcast)
+        //------------------------------------------------------------
 
-
-		   //--------------------------------------------------------------
-		   //  Process Global Disarm Broadcast message
-		   //--------------------------------------------------------------
-
-		   cp = strstr(MessageType,GlobalDisarm);
-           if (cp!= NULL)
-           {
-               DisArm();
-            
-               continue;
-           }
+        cp = strstr(MessageType,GlobalArm);
+        if (cp!= NULL)
+        {
+            if (fStarted == TRUE)
+            {
+                Arm();
+            }
+            continue;
+        }
 
 
 
 
+        //--------------------------------------------------------------
+        //  Process Global Disarm Broadcast message
+        //--------------------------------------------------------------
+
+        cp = strstr(MessageType,GlobalDisarm);
+        if (cp!= NULL)
+        {
+            DisArm();
+
+            continue;
+        }
 
 
-		   //-------------------------------------------------------------
-		   //    Global Load Show Broadcast message
-		   //-------------------------------------------------------------
-		   
-           // Change this logic to look in specific record position
-           cp = strstr(MessageType,GlobalLoadShow);
-           if (cp!= NULL)
-           {
-               memset(Port,'\0',sizeof(Port));
-               memcpy(Port,(void *)Message + 8,3);  
-               intPort = atoi(Port); 
-               LoadShow();
-               memset((char *)Message,'\0',sizeof(Message));
-               continue;
-           }
+
+
+
+
+        //-------------------------------------------------------------
+        //    Global Load Show Broadcast message
+        //-------------------------------------------------------------
+
+        // Change this logic to look in specific record position
+        cp = strstr(MessageType,GlobalLoadShow);
+        if (cp!= NULL)
+        {
+            memset(Port,'\0',sizeof(Port));
+            memcpy(Port,(void *)Message + 8,3);  
+            intPort = atoi(Port); 
+            LoadShow();
+            memset((char *)Message,'\0',sizeof(Message));
+            continue;
+        }
 
 
 
@@ -1203,198 +1194,198 @@ void main(void)
         }
 
 
-		//---------------------------------------------------------------
+        //---------------------------------------------------------------
         // Check for Poll Broadcast
         // Used when all units are 16 Ports
-		//---------------------------------------------------------------
+        //---------------------------------------------------------------
 
         cp = strstr(MessageType,Poll);
         if (cp!= NULL)
         {
-             memset(ACKdata,'\0',sizeof(ACKdata));
-             strncpy(ACKdata,PollReply,sizeof(PollReply));
-             SetStatus();
-             strcat(ACKdata,Status);
-             strncat(ACKdata,ThisUnit,3);
-             strncat(ACKdata,ThisLogicalAddr,3);
-             cdigit[0]=  IntToCh(CheckDigit(ACKdata));
-             strncat(ACKdata,cdigit,1); 
+            memset(ACKdata,'\0',sizeof(ACKdata));
+            strncpy(ACKdata,PollReply,sizeof(PollReply));
+            SetStatus();
+            strcat(ACKdata,Status);
+            strncat(ACKdata,ThisUnit,3);
+            strncat(ACKdata,ThisLogicalAddr,3);
+            cdigit[0]=  IntToCh(CheckDigit(ACKdata));
+            strncat(ACKdata,cdigit,1); 
 
-             // Set RS485 Transmit mode
-             PollDelay = atoi(ThisUnit) * 10;
-             DelayMS((unsigned long)PollDelay);   // delay to allow other units to respond without collision
-             // Set RS485 Transmit mode
-             Pin5HIGH();
-             Len = strlen(ACKdata);
-             vputsUSART(ACKdata,Len);
-             DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
+            // Set RS485 Transmit mode
+            PollDelay = atoi(ThisUnit) * 10;
+            DelayMS((unsigned long)PollDelay);   // delay to allow other units to respond without collision
+            // Set RS485 Transmit mode
+            Pin5HIGH();
+            Len = strlen(ACKdata);
+            vputsUSART(ACKdata,Len);
+            DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
             continue;
         }
 
 
 
-		//----------------------------------------------------------------
+        //----------------------------------------------------------------
         // Check for Fast Poll Broadcast
-		//----------------------------------------------------------------
+        //----------------------------------------------------------------
 
         cp = strstr(MessageType,FastPoll);
         if (cp!= NULL)
         {
-             
-             memset(ACKdata,'\0',sizeof(ACKdata));
-             memset(NetworkTopology,'\0',sizeof(NetworkTopology));
-             memcpy((void *)NetworkTopology,(void *)Message+ 11,sizeof(NetworkTopology));
-             strncpy(ACKdata,PollReply,sizeof(PollReply));
-             SetShortStatus();
-             strcat(ACKdata,Status);
-             strncat(ACKdata,ThisUnit,3);
-             strncat(ACKdata,ThisLogicalAddr,3);
-             cdigit[0]=  IntToCh(CheckDigit(ACKdata));
-             strncat(ACKdata,cdigit,1); 
 
-             // Calculate Response Delay
+            memset(ACKdata,'\0',sizeof(ACKdata));
+            memset(NetworkTopology,'\0',sizeof(NetworkTopology));
+            memcpy((void *)NetworkTopology,(void *)Message+ 11,sizeof(NetworkTopology));
+            strncpy(ACKdata,PollReply,sizeof(PollReply));
+            SetShortStatus();
+            strcat(ACKdata,Status);
+            strncat(ACKdata,ThisUnit,3);
+            strncat(ACKdata,ThisLogicalAddr,3);
+            cdigit[0]=  IntToCh(CheckDigit(ACKdata));
+            strncat(ACKdata,cdigit,1); 
 
-             iThisUnit = atoi(ThisUnit);
-             iBankIndex = atoi(ThisUnit)/100;
-         
-             ResponseDelay = iThisUnit - (iBankIndex * 100);
-             
+            // Calculate Response Delay
 
-            
+            iThisUnit = atoi(ThisUnit);
+            iBankIndex = atoi(ThisUnit)/100;
 
-             // Get delays for all lower Banks
-             for(i=0; i<iBankIndex; i++)
-             {
+            ResponseDelay = iThisUnit - (iBankIndex * 100);
+
+
+
+
+            // Get delays for all lower Banks
+            for (i=0; i<iBankIndex; i++)
+            {
                 memset(Wrk1,'\0',sizeof(Wrk1));
                 memcpy((void *)Wrk1,(void *)NetworkTopology + (i*3)+1,2);    //Units and Tens position of highest unit number in bank
                 ResponseDelay += atoi(Wrk1);
 
-             }
-
-			 
-
-             // Delay 10 MS per responding unit for this unit and all preceeding units
-             // 7 MS is min required delay, 10MS is allocated for safety.
-             // An additional 20MS is added per bank to adjust for Radio Delays if
-             //   separate radios are operational on each address bank.
-             PollDelay = (ResponseDelay  * 10) + (iBankIndex * 20);
-            
-             DelayMS((unsigned long)PollDelay);   // delay to allow other units to respond without collision
+            }
 
 
-             // Set RS485 Transmit mode
-             Pin5HIGH();
-             Len = strlen(ACKdata);
-             vputsUSART(ACKdata,Len);
-             DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
-             Pin5LOW();
+
+            // Delay 10 MS per responding unit for this unit and all preceeding units
+            // 7 MS is min required delay, 10MS is allocated for safety.
+            // An additional 20MS is added per bank to adjust for Radio Delays if
+            //   separate radios are operational on each address bank.
+            PollDelay = (ResponseDelay  * 10) + (iBankIndex * 20);
+
+            DelayMS((unsigned long)PollDelay);   // delay to allow other units to respond without collision
+
+
+            // Set RS485 Transmit mode
+            Pin5HIGH();
+            Len = strlen(ACKdata);
+            vputsUSART(ACKdata,Len);
+            DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
+            Pin5LOW();
             continue;
         }
 
 
 
 
-		//------------------------------------------------------------------
-		//   Slow Poll Broadcast message
-		//------------------------------------------------------------------
+        //------------------------------------------------------------------
+        //   Slow Poll Broadcast message
+        //------------------------------------------------------------------
 
         cp = strstr(MessageType,SlowPoll);
         if (cp!= NULL)
         {
-             memset(ACKdata,'\0',sizeof(ACKdata));
-             memset(NetworkTopology,'\0',sizeof(NetworkTopology));
-             memcpy((void *)NetworkTopology,(void *)Message+ 11,sizeof(NetworkTopology));
-             strncpy(ACKdata,PollReply,sizeof(PollReply));
-             SetStatus();
-             strcat(ACKdata,Status);
-             strncat(ACKdata,ThisUnit,3);
-             strncat(ACKdata,ThisLogicalAddr,3);
-             cdigit[0]=  IntToCh(CheckDigit(ACKdata));
-             strncat(ACKdata,cdigit,1); 
+            memset(ACKdata,'\0',sizeof(ACKdata));
+            memset(NetworkTopology,'\0',sizeof(NetworkTopology));
+            memcpy((void *)NetworkTopology,(void *)Message+ 11,sizeof(NetworkTopology));
+            strncpy(ACKdata,PollReply,sizeof(PollReply));
+            SetStatus();
+            strcat(ACKdata,Status);
+            strncat(ACKdata,ThisUnit,3);
+            strncat(ACKdata,ThisLogicalAddr,3);
+            cdigit[0]=  IntToCh(CheckDigit(ACKdata));
+            strncat(ACKdata,cdigit,1); 
 
-             // Calculate Response Delay if delay has not been set
+            // Calculate Response Delay if delay has not been set
 
-             if(SlowPollDelay == 0)
-             {
+            if (SlowPollDelay == 0)
+            {
 
-             
+
 
                 iThisUnit = atoi(ThisUnit);
                 iBankIndex = atoi(ThisUnit)/100;
-         
-                ResponseDelay = iThisUnit - (iBankIndex * 100);
-             
 
-            
+                ResponseDelay = iThisUnit - (iBankIndex * 100);
+
+
+
 
                 // Get delays for all lower Banks
-                for(i=0; i<iBankIndex; i++)
+                for (i=0; i<iBankIndex; i++)
                 {
-                   memset(Wrk1,'\0',sizeof(Wrk1));
-                   memcpy((void *)Wrk1,(void *)NetworkTopology + (i*3)+1,2);
-                   ResponseDelay += atoi(Wrk1);
+                    memset(Wrk1,'\0',sizeof(Wrk1));
+                    memcpy((void *)Wrk1,(void *)NetworkTopology + (i*3)+1,2);
+                    ResponseDelay += atoi(Wrk1);
 
                 }
 
                 // Delay 120 MS per responding unit
                 SlowPollDelay = ResponseDelay  * 120;
-             }
-
-            
-            
-             DelayMS((unsigned long)SlowPollDelay);   // delay to allow other units to respond without collision
+            }
 
 
-             // Set RS485 Transmit mode
-             Pin5HIGH();
-             Len = strlen(ACKdata);
-             vputsUSART(ACKdata,Len);
-             DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
+
+            DelayMS((unsigned long)SlowPollDelay);   // delay to allow other units to respond without collision
+
+
+            // Set RS485 Transmit mode
+            Pin5HIGH();
+            Len = strlen(ACKdata);
+            vputsUSART(ACKdata,Len);
+            DelayMS(1);   // wait for data to clear RS-485 port before dropping the data direction signal
             continue;
         }
 
 
 
-		//-------------------------------------------------------------------
+        //-------------------------------------------------------------------
         // Set Slow Poll Delay
-		//-------------------------------------------------------------------
+        //-------------------------------------------------------------------
 
         cp = strstr(MessageType,SetSlowPollDelay);
         if (cp!= NULL)
         {
-			memset(Wrk2,'\0',sizeof(Wrk2));
+            memset(Wrk2,'\0',sizeof(Wrk2));
             memcpy((void *)Wrk2,(void *)Message+11,2);
             i = atoi(Wrk2);
             // i now has number of Address,delay pair in the message
-	        memset(Wrk2,'\0',sizeof(Wrk2));
+            memset(Wrk2,'\0',sizeof(Wrk2));
 
             // Look for This Address in message
-            for(j=0; j<i; j++)
+            for (j=0; j<i; j++)
             {
-               k = j*8;
-               memcpy((void *)Wrk2,(void *)Message+13 + k,3);
-               if(strcmp(Wrk2,ThisUnit) == 0)
-               {
-                  // This address found, get the delay.
-                  memset(Wrk2,'\0',sizeof(Wrk2));
-                  memcpy((void *)Wrk2,(void *)Message+16+k,5);
-                  SlowPollDelay = atol(Wrk2);
-               
+                k = j*8;
+                memcpy((void *)Wrk2,(void *)Message+13 + k,3);
+                if (strcmp(Wrk2,ThisUnit) == 0)
+                {
+                    // This address found, get the delay.
+                    memset(Wrk2,'\0',sizeof(Wrk2));
+                    memcpy((void *)Wrk2,(void *)Message+16+k,5);
+                    SlowPollDelay = atol(Wrk2);
 
-               }
 
-             
+                }
+
+
             }
 
             continue;
         }
 
-       
-		////////////////////////////////////////////////////////////////////////////  Unit Specific Message Processing /////////////////////////////////////////////////////
 
-		//-------------------------------------------------------------------
+        ////////////////////////////////////////////////////////////////////////////  Unit Specific Message Processing /////////////////////////////////////////////////////
+
+        //-------------------------------------------------------------------
         // Check to see if the message is for this unit
-		//-------------------------------------------------------------------
+        //-------------------------------------------------------------------
         strncpy(WorkArea.WorkString,Message,sizeof(WorkArea.WorkString));
         if (strncmp(WorkArea.Header.Unit,ThisUnit,3) == 0)
         {
@@ -1446,59 +1437,58 @@ void main(void)
                         // Process Work Unit if not programming
                         ProcessWorkUnit();
 
-                    }
-                    else
+                    } else
                     {
                         // Programming Active
 
-                            if (EndOfWorkQueue < NumPorts+1)
+                        if (EndOfWorkQueue < NumPorts+1)
+                        {
+                            // Queue Work Unit  if array has room
+
+                            // Message WUs must be in Seq order
+
+                            i = wu+1 + TESeqIndex;
+
+                            memcpy(ShowEvents[i].TE.Seq,( void *)SeqTable[i],3);
+                            memcpy(Seq,(void *)ShowEvents[i].TE.Seq,3);
+
+                            memcpy(ShowEvents[i].TE.NextSeq,(void *)NextSeq,3); 
+
+                            memset(WrkArea,'\0',sizeof(WrkArea));
+                            strncpy(WrkArea,Clock.TimeString,8);
+                            LongWork = atol(WrkArea);
+                            ShowEvents[i].TE.EventTimeMS = LongWork;
+
+                            memset(ShowEvents[i].TE.Port,'\0',sizeof(ShowEvents[0].TE.Port)); 
+                            strncpy(ShowEvents[i].TE.Port,Port,3);
+
+                            memset(ShowEvents[i].TE.Cue,'\0',sizeof(ShowEvents[0].TE.Cue)); 
+                            strncpy(ShowEvents[i].TE.Cue,Cue,3);
+
+                            memset(Wrk1,'\0',sizeof(Wrk1));
+
+                            if (TRC == TRUE)
                             {
-                                // Queue Work Unit  if array has room
-
-                                // Message WUs must be in Seq order
-
-                                i = wu+1 + TESeqIndex;
-
-                                memcpy(ShowEvents[i].TE.Seq,( void *)SeqTable[i],3);
-                                memcpy(Seq,(void *)ShowEvents[i].TE.Seq,3);
-
-                                memcpy(ShowEvents[i].TE.NextSeq,(void *)NextSeq,3); 
-
-                                memset(WrkArea,'\0',sizeof(WrkArea));
-                                strncpy(WrkArea,Clock.TimeString,8);
-                                LongWork = atol(WrkArea);
-                                ShowEvents[i].TE.EventTimeMS = LongWork;
-
-                                memset(ShowEvents[i].TE.Port,'\0',sizeof(ShowEvents[0].TE.Port)); 
-                                strncpy(ShowEvents[i].TE.Port,Port,3);
-
-                                memset(ShowEvents[i].TE.Cue,'\0',sizeof(ShowEvents[0].TE.Cue)); 
-                                strncpy(ShowEvents[i].TE.Cue,Cue,3);
-
-                                memset(Wrk1,'\0',sizeof(Wrk1));
-
-                                if (TRC == TRUE)
-                                {
-                                    sprintf(Wrk1,"Queue T%s C%s P%s S%s N%s", Clock.TimeString, Cue, Port, Seq, NextSeq);
-                                    Trace(Wrk1,None);
-                                }
-
-
-                                EndOfWorkQueue ++;
-                                nQueue = EndOfWorkQueue-HeadOfWorkQueue;
-                                if ( wu == atoi(NumberWorkUnits)-1)
-                                {
-                                    // Revert back to normal WU processing
-                                    ProgrammingActive = 0;
-                                    TESeqIndex = wu + 1;
-                                    SizeOfWU = 11;
-                                    memset(ShowType,'A',1);
-                                }
-
-                                continue;
-
+                                sprintf(Wrk1,"Queue T%s C%s P%s S%s N%s", Clock.TimeString, Cue, Port, Seq, NextSeq);
+                                Trace(Wrk1,None);
                             }
-                      
+
+
+                            EndOfWorkQueue ++;
+                            nQueue = EndOfWorkQueue-HeadOfWorkQueue;
+                            if ( wu == atoi(NumberWorkUnits)-1)
+                            {
+                                // Revert back to normal WU processing
+                                ProgrammingActive = 0;
+                                TESeqIndex = wu + 1;
+                                SizeOfWU = 11;
+                                memset(ShowType,'A',1);
+                            }
+
+                            continue;
+
+                        }
+
                         else
                         {
                             SendNAK();
@@ -1564,7 +1554,7 @@ void SendACK(void)
         SetStatus();
         strncat(ACKdata,Status,22);
         ReturnStatus = 0;
-        
+
     }
 
     if ( ReturnStatus == 2)
@@ -1572,11 +1562,11 @@ void SendACK(void)
         SetStatus();
         strcat(ACKdata,TodaysDate);
         ReturnStatus = 0;
-        
+
     }
     cdigit[0]=  IntToCh(CheckDigit(ACKdata));
     strncat(ACKdata,cdigit,1); 
-   
+
 
 
     DelayMS(10);   // Delay to allow Mesh Radios time to turnaround
@@ -1651,7 +1641,7 @@ void ParseWorkUnit(void)
     strncpy(Clock.TimeString,WorkArea.WU.TimeCode.MS,8);
 
     //if (strncmp(ShowType,TypeT,1) == 0)
-    if(ProgrammingActive == TRUE)
+    if (ProgrammingActive == TRUE)
     {
         memset(NextSeq,'\0',sizeof(NextSeq));
         memcpy(NextSeq,(void *)WorkArea.TWU.NextSeq,3);
@@ -1660,8 +1650,7 @@ void ParseWorkUnit(void)
         memset((char *)Cue,'\0',sizeof(Cue));
         memcpy(Cue,(void *)WorkArea.TWU.Cue,3);
         intPort = atoi(Port);
-    }
-    else
+    } else
     {
         memset(Port,'\0',sizeof(Port));
         memcpy(Port,(void *)WorkArea.WU.Port,3);  
@@ -1684,7 +1673,7 @@ void ProcessWorkUnit(void)
         fPaused = FALSE;
         Pin28HIGH();           // Session Up
         SetSessionStatus('S');
-        
+
         break;
     case iShutdown:
         fStarted = FALSE;
@@ -1709,7 +1698,7 @@ void ProcessWorkUnit(void)
         break;
     case iFire:
         if (ArmPending == TRUE)
-		ReArm();
+            ReArm();
         if (Armed == TRUE)
         {
             Fire(intPort);
@@ -1721,10 +1710,10 @@ void ProcessWorkUnit(void)
         //SetStatus();
 
         break;
-	case iAssignLogical:
+    case iAssignLogical:
         strcpy(ThisLogicalAddr,Port);
-		SetLogicalAddr(ThisLogicalAddr);
- 		break;
+        SetLogicalAddr(ThisLogicalAddr);
+        break;
     case iTraceON:
         TRC=TRUE;
         break;
@@ -1732,7 +1721,7 @@ void ProcessWorkUnit(void)
         TRC = FALSE;
         break;
     case  iArm:
-	    Arm();
+        Arm();
         //ArmPending = TRUE;
         break;
     case  iDisarm:
@@ -1755,7 +1744,7 @@ void ProcessWorkUnit(void)
             C = *p2;
             Write_b_eep((unsigned int)p,(unsigned char)C);
             ClrWdt();
-           
+
         }
 
 
@@ -1763,7 +1752,7 @@ void ProcessWorkUnit(void)
 
 
     case  iLoadShow:
-        
+
         LoadShow();
         //memcpy((void *)&ShowLoaded,&DefaultShow,1);
 
@@ -1797,17 +1786,17 @@ void ProcessWorkUnit(void)
         }
         break;
 
-case      iPause:
-          fPaused = TRUE;
-          break;
+    case      iPause:
+        fPaused = TRUE;
+        break;
 
-case      iContinue:
-          fPaused = FALSE;
-          break;
-case      iQueryDate:
-          ReturnStatus = 2;
+    case      iContinue:
+        fPaused = FALSE;
+        break;
+    case      iQueryDate:
+        ReturnStatus = 2;
         // ACK will add status when Return Build Date when Status = 2 
-          break;
+        break;
 
     default:;
         Trace (BadMsg,None);
@@ -1835,13 +1824,12 @@ void SetStatus(void)
 
         // The PIC requirews two reads to get correct pin state
 
-        PortStatus =  PinTest(GetCue(intPort));
-        PortStatus =  PinTest(GetCue(intPort));
+        PortStatus =  PinTest(GetPortAddress(intPort));
+        PortStatus =  PinTest(GetPortAddress(intPort));
         if (PortStatus == LOW)
         {
             Status[intPort+2] = '0';
-        }
-        else
+        } else
         {
             Status[intPort+2] = '1';
         }
@@ -1851,14 +1839,13 @@ void SetStatus(void)
     if (Armed == TRUE)
     {
         Status[NumPorts+3] = '1';
-    }
-    else
+    } else
     {
         Status[NumPorts+3] = '0';
     }
 
     Status[NumPorts+4] =  ShowLoaded;
-   
+
     Voltage = MeasureVoltage();
     memset(CVoltage,'0',sizeof(CVoltage));
     sprintf(CVoltage,"%04d",Voltage);
@@ -1879,14 +1866,13 @@ void SetShortStatus(void)
     if (Armed == TRUE)
     {
         Status[3] = '1';
-    }
-    else
+    } else
     {
         Status[3] = '0';
     }
 
     Status[4] =  ShowLoaded;
-   
+
     Voltage = MeasureVoltage();
     memset(CVoltage,'0',sizeof(CVoltage));
     sprintf(CVoltage,"%04d",Voltage);
@@ -1902,8 +1888,7 @@ void ResendACKNAK(void)
     if (ACKSENT==TRUE)
     {
         SendACK();
-    }
-    else
+    } else
     {
         SendNAK();
     }
@@ -1955,10 +1940,10 @@ void Receive(char volatile Mesg[])
         // Clear UART Buffer and msg pointer
         if (TRC == TRUE)
         {
-           // memset(Wrk1,'\0',sizeof(Wrk1));
-           // sprintf(Wrk1,"==> %d %s \r\n",RecResult,Mesg);
+            // memset(Wrk1,'\0',sizeof(Wrk1));
+            // sprintf(Wrk1,"==> %d %s \r\n",RecResult,Mesg);
             //Trace(Wrk1,None);
-			Trace(Message,In);
+            Trace(Message,In);
 
 
             if (UARTErrorOR > 0)
@@ -1978,7 +1963,7 @@ void Receive(char volatile Mesg[])
 
 
         DeadManCounter = 0;
-       
+
     }
     AllPinsOff();
 
@@ -2019,7 +2004,7 @@ void ResetSlave(void)
 {
 
     unsigned char C;
-	char EndMsg[17] = "Reset Complete";
+    char EndMsg[17] = "Reset Complete";
 
     Trace(ResetMsg,None);
     iNextReceiveMessage = 1;
@@ -2029,17 +2014,12 @@ void ResetSlave(void)
     Pin6LOW();
     Pin28LOW();
 
+  
+    ResetAllPorts();
 
-    // force all pins down
-    ShowTimeMS = 1000;
-    AnyPinOn = 1;
-    for (i=1; i<NumPorts+1; i++)
-    {
-        CueOffTime[i] = 1;
-    }
-    //AllPinsOff();
-	ResetAllPorts();
-
+    TMR0L = 0;
+    TMR0H = 0;
+    TimerPopCount = 0;
     ShowTimeMS = 0;
 
     Armed = FALSE;
@@ -2077,14 +2057,14 @@ void ResetSlave(void)
     CloseTimer0();
     CloseTimer1();
     memset((char *)Message,'\0',sizeof(Message));
-    
+
 
     // Show Reset on Leds
 
     Pin28HIGH();
     DelayMS(50);
     Pin28LOW();
-   
+
 
     // Get EEPROM Default Show, if set
     DefaultShow = GetDefaultShow();
@@ -2094,47 +2074,46 @@ void ResetSlave(void)
         intPort = DefaultShow - 0x30;
         if (intPort > 0)
         {
-            
+
             LoadShow();
             memcpy((void *)&ShowLoaded,(void *)&DefaultShow,1);
 
         }
-    }   
+    }
 
     C = GetSessionStatus();
-    if(C == 'S')
+    if (C == 'S')
     {
         fStarted = TRUE;
         Pin28HIGH();           // Session Up
-     }
+    }
 
 
 
     C = GetTEventStatus();
-    if(C == 'A')
+    if (C == 'A')
     {
-       //TEventActive = 1;
-       RestoreShowStatus();
-       StartTimer0();
+        //TEventActive = 1;
+        RestoreShowStatus();
+        StartTimer0();
     }
 
 // Add Get Armed Status logic Here.   If Armed Status = 'A' then set armed pending, waiting for Time Pulse or other command.
 
- C = GetArmedStatus();
-    if(C == 'A')
+    C = GetArmedStatus();
+    if (C == 'A')
     {
-       ArmPending = TRUE;
-       ClockStarted = TRUE;
-    }
-    else
+        ArmPending = TRUE;
+        ClockStarted = TRUE;
+    } else
     {
-		ArmPending = FALSE;
+        ArmPending = FALSE;
 
     }
 
 
-   Trace(EndMsg,None);   
-   
+    Trace(EndMsg,None);   
+
 }
 
 void Blip(void)
@@ -2156,8 +2135,7 @@ void Blip(void)
             Pin3 = 0;
             Pin3LOW();
 
-        }
-        else
+        } else
         {
             Pin3 = 1;
             Pin3HIGH();
@@ -2172,8 +2150,7 @@ void Blip(void)
             BlipCtr = 0;
         }
 
-    }
-    else
+    } else
     {
         Pin3LOW();
     }
@@ -2231,7 +2208,7 @@ void ShowUnitAddress(void)
         DelayMS(300);
     }
 
- DelayMS(500);
+    DelayMS(500);
 
     for (i=0; i< l; i++)
     {
@@ -2242,7 +2219,7 @@ void ShowUnitAddress(void)
         DelayMS(300);
 
     } 
- if ((j>0 || k>0)  && l==0)
+    if ((j>0 || k>0)  && l==0)
     {
         Pin3HIGH();
         DelayMS(600);
@@ -2291,14 +2268,14 @@ void Trace(char *Msg, int Direction)
 
         strcat(TraceMsg,Msg);
         strncat(TraceMsg,CRLF,2);
-       
+
 
         //len = strlen(TraceMsg);
 
         // Write via software UART on Pin 4  at 38400 BPS
         putsUART(TraceMsg);
 
-        
+
     }
 #endif
 }
@@ -2308,7 +2285,7 @@ void Trace(char *Msg, int Direction)
 
 
 
-int GetCue(int Port)
+int GetPortAddress(int Port)
 {
     return Cues[Port];
 }
@@ -2317,16 +2294,16 @@ int GetCue(int Port)
 void StartTimer0(void)
 {
 
-   union Timers timer;
-   OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_EDGE_RISE );   
-   timer.lt = 1701;     // Set timer to overflow every 32 MS
-   // Value determined by calculation and then observation of timer overflow in Simulator
-   TMR0H = timer.bt[1]; // Write low byte to Timer0
-   TMR0L = timer.bt[0]; // Write high byte to Timer0
+    union Timers timer;
+    OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_EDGE_RISE );   
+    timer.lt = 1701;     // Set timer to overflow every 32 MS
+    // Value determined by calculation and then observation of timer overflow in Simulator
+    TMR0H = timer.bt[1]; // Write low byte to Timer0
+    TMR0L = timer.bt[0]; // Write high byte to Timer0
 
-   // One Timer pop = 32MS
-   TimerPopCount = 0;
-  
+    // One Timer pop = 32MS
+    TimerPopCount = 0;
+
 }
 
 void StartTimer1(void)
@@ -2374,7 +2351,7 @@ void LoadShow(void)
         memset(ShowType,'T',1);
         EndOfWorkQueue = 0;
         //sprintf(&ShowLoaded,"%1d",intPort);
-        
+
     }
 
 }
@@ -2416,95 +2393,81 @@ void Dump (char *Start, int Len)
 
 void AllPinsOff(void)
 {
-    int i,Pin;
+    int i,Pin, APinIsOn;
     char TraceMsg[40];
 
-    if (AnyPinOn == 0) return;
+    if (AnyPinOn == 0) return;    
 
     AnyPinOn = 0;
+    APinIsOn = 0;
+
+    ShowTimeMS = GetTimeMS();
+
 
     for (i=1; i<NumPorts+1; i++)
     {
-        Pin = GetCue(i);
+        Pin = GetPortAddress(i);
 
-        // Turn off cues that have met min Cue On Time
-        if (CueOffTime[i] < ShowTimeMS)
-        {
-            if (CueOffTime[i] > 0)
+        if(CueOffTime[i] > 0)
+		{
+			if(CueOffTime[i] < ShowTimeMS)
             {
                 PinLOW(Pin);
-                if (TRC == TRUE)
-                {
-                  sprintf(TraceMsg,"Pin %d Down at %ld",Pin, ShowTimeMS);
-                  Trace(TraceMsg,None);
-                }
                 CueOffTime[i] = 0;
-
             }
-        }
-        else
-        {
-            AnyPinOn = 1;
-        } 
-
+            else
+            {
+				APinIsOn = 1;
+                AnyPinOn = 1;
+            }
+		}
     }
-
-
-
 } 
 
 
-void Fire(int Cue)
+void Fire(int Port)
 {
 
-    int  Pin;
+    int  PortAddress;
 
     char TraceMsg[30];
 
-   // if (fPaused == TRUE)
-   // return;
 
-   
-
-    Pin = GetCue(Cue);
+    // Translate Port number to hardware address
+    PortAddress = GetPortAddress(Port);
 
 
-    // Only Fire Pin Once to allow for multiple Broadcasts
-    //if (Pin != LastFire)
-    //{
-        PinHIGH(Pin);
-        // Removed 9/12/2016 to reduce Cue fire loop time to allow 1MS Cue spacing
-        //ShowTimeMS = GetTimeMS();
-        CueOffTime[Cue] = ShowTimeMS + MatchFireTime;   
-        AnyPinOn = 1;
-        LastFire = Pin;
-        if (TRC == TRUE)
-        {
-            sprintf(TraceMsg,"Fire Port %d Pin %d at %ld",Cue,Pin,ShowTimeMS);
-            Trace(TraceMsg,None); 
-        }
-   // }
+    PinHIGH(PortAddress);
 
+    ShowTimeMS = GetTimeMS();
+    CueOffTime[Port] = ShowTimeMS + MatchFireTime;   
+    AnyPinOn = 1;
+    LastFire = Port;
+    if (TRC == TRUE)
+    {
+        sprintf(TraceMsg,"Fire Port %d Port %d at %ld",Cue,Port,ShowTimeMS);
+        Trace(TraceMsg,None); 
+    }
 
 }
 
 int MeasureVoltage(void)
 {
-unsigned int H;
-unsigned int L;
+    unsigned int H;
+    unsigned int L;
 
- unsigned int result;
+    unsigned int result;
 
- OpenADC(ADC_FOSC_RC    &
+    OpenADC(ADC_FOSC_RC    &
             ADC_RIGHT_JUST  &
             ADC_20_TAD,
             ADC_REF_VDD_VSS &
             ADC_CH0        &
             ADC_INT_OFF, ADC_1ANA );
 
-	Delay10TCYx(5);
+    Delay10TCYx(5);
     ConvertADC();
-    while(BusyADC());
+    while (BusyADC());
     H = ADRESH;
     L = ADRESL;
     result =(H << 8 )| L; 
@@ -2552,19 +2515,19 @@ void SetLogicalAddr(char Data[3])
 void SetSessionStatus(unsigned char Status)
 {
     // Set Session Status into EEPROM
-        Busy_eep();
-        Write_b_eep(EESessionStatus,Status);
-        DelayMS(10);
-  
+    Busy_eep();
+    Write_b_eep(EESessionStatus,Status);
+    DelayMS(10);
+
 }
 
 void SetArmedStatus(unsigned char Status)
 {
     // Set Armed Status into EEPROM
-        Busy_eep();
-        Write_b_eep(EEArmedStatus,Status);
-        DelayMS(10);
-          
+    Busy_eep();
+    Write_b_eep(EEArmedStatus,Status);
+    DelayMS(10);
+
 }
 
 int GetUnitAddr(void)
@@ -2637,16 +2600,16 @@ int GetDefaultShow(void)
 void SetTEventStatus(unsigned char Status)
 {
     // Set TEvent Status into EEPROM
-        Busy_eep();
-        Write_b_eep(EETEventStatus,Status);
-       // DelayMS(10);
-  
+    Busy_eep();
+    Write_b_eep(EETEventStatus,Status);
+    // DelayMS(10);
+
 }
 
 unsigned char GetSessionStatus(void)
 {
     unsigned char C;
-        
+
     Busy_eep();
     C = Read_b_eep(EESessionStatus);
     return C;
@@ -2655,7 +2618,7 @@ unsigned char GetSessionStatus(void)
 unsigned char GetArmedStatus(void)
 {
     unsigned char C;
-        
+
     Busy_eep();
     C = Read_b_eep(EEArmedStatus);
     return C;
@@ -2664,7 +2627,7 @@ unsigned char GetArmedStatus(void)
 unsigned char GetTEventStatus(void)
 {
     unsigned char C;
-        
+
     Busy_eep();
     C = Read_b_eep(EETEventStatus);
     return C;
@@ -2688,99 +2651,99 @@ void ShowAddressAndSoftwareVersion(void)
 
 void Arm()
 {
-        Armed = TRUE;
-        SetArmedStatus('A');
-        Pin6HIGH();        // Turn On Arming Circuit
-        fArm = TRUE;
-        ShowTimeMS = 0;
-        StartTimer0();
-        StartTimer1();
-        ClockStarted = TRUE; 
-        //ArmPending = FALSE;
+    Armed = TRUE;
+    SetArmedStatus('A');
+    Pin6HIGH();        // Turn On Arming Circuit
+    fArm = TRUE;
+    ShowTimeMS = 0;
+    StartTimer0();
+    StartTimer1();
+    ClockStarted = TRUE; 
+    //ArmPending = FALSE;
 }
 
 void ReArm()
 {
 
-		Armed = TRUE;
-		Pin6HIGH();
-		ArmPending = FALSE;
-        StartTimer0();
-        StartTimer1();
-        ClockStarted = TRUE; 
+    Armed = TRUE;
+    Pin6HIGH();
+    ArmPending = FALSE;
+    StartTimer0();
+    StartTimer1();
+    ClockStarted = TRUE; 
 
 }
 
 void DisArm()
 {
-        Armed = FALSE;
-        SetArmedStatus('D');
-        Pin6LOW();        // Turn On Arming Circuit
-        fArm = FALSE;
-        ShowTimeMS = 0;
-        CloseTimer0();
-        CloseTimer1();
-        ClockStarted = FALSE; 
-        ArmPending = FALSE;
-        memset((char *)Message,'\0',sizeof(Message));
+    Armed = FALSE;
+    SetArmedStatus('D');
+    Pin6LOW();        // Turn On Arming Circuit
+    fArm = FALSE;
+    ShowTimeMS = 0;
+    CloseTimer0();
+    CloseTimer1();
+    ClockStarted = FALSE; 
+    ArmPending = FALSE;
+    memset((char *)Message,'\0',sizeof(Message));
 
 }
 
 void CheckpointShowStatus(void)
 {
-	 unsigned char C;
-	 int i;
+    unsigned char C;
+    int i;
 
     // This routine takes approx 400 MS to execute
 
     // Checkpoint Show Parameters into EEPROM
-	Len = &TEventParameterEnd - &TEventParameterBegin;
+    Len = &TEventParameterEnd - &TEventParameterBegin;
     // Len +1 to allow for saving and restoration of integers
-    for(i=0; i<Len+1; i++)
+    for (i=0; i<Len+1; i++)
     {
         EEAddress = EETEventCheckpoint + i;
         C = *(&TEventParameterBegin + i);
         Busy_eep();
         Write_b_eep(EEAddress,C);
         ClrWdt();
-     }     
+    }     
 }
 
 
 void RestoreShowStatus(void)
 {
-     unsigned char C;
-     char *p;
-	 int i;
-		// Restore critical Show Checkpoint Parameters from EEPROM
+    unsigned char C;
+    char *p;
+    int i;
+    // Restore critical Show Checkpoint Parameters from EEPROM
 
-        Len = &TEventParameterEnd - &TEventParameterBegin;
-        memset(&TEventParameterBegin, '\0', Len);
-        // intPort contains show slot number
-        
-        // Len +1 to allow for saving and restoration of integers
-        for (i=0; i<Len+1; i++)
-        {
+    Len = &TEventParameterEnd - &TEventParameterBegin;
+    memset(&TEventParameterBegin, '\0', Len);
+    // intPort contains show slot number
 
-            Busy_eep();
-            C = Read_b_eep(EETEventCheckpoint + i);
-            p = &TEventParameterBegin  + i;
-            *p = C;
-            ClrWdt();
-        }
-      
+    // Len +1 to allow for saving and restoration of integers
+    for (i=0; i<Len+1; i++)
+    {
+
+        Busy_eep();
+        C = Read_b_eep(EETEventCheckpoint + i);
+        p = &TEventParameterBegin  + i;
+        *p = C;
+        ClrWdt();
+    }
+
 }
 
 void ResetAllPorts(void)
 {
-	int i;
-	int Pin;
+    int i;
+    int Pin;
 
-	for(i=1; i<NumPorts; i++)
-	{
-		Pin = GetCue(i);
-		PinLOW(Pin);
-	}
+    for (i=1; i<NumPorts; i++)
+    {
+        Pin = GetPortAddress(i);
+        PinLOW(Pin);
+    }
 }
 
 

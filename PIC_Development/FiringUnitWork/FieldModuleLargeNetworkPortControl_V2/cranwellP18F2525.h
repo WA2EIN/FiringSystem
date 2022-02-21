@@ -29,6 +29,7 @@ extern unsigned int volatile QTail;
 extern unsigned int volatile pMsg ;
 extern unsigned char uartdata;
 ram unsigned char volatile CUart;
+ram unsigned int volatile PadCount;    // Number of Message Start Pad characters.   >3 = Hard Reset
 ram unsigned long volatile TimerPopCount;
 ram int volatile Hdr;
 ram int volatile DataLen[3];
@@ -105,6 +106,7 @@ void MyISR (void)
      if (CUart == 0xff) 
      {
         Hdr = 1; 
+        PadCount ++;
         iStarting = FALSE;
         goto exit;
      }
@@ -113,6 +115,7 @@ void MyISR (void)
      if(Hdr == 1)
      {
        
+        PadCount = 0;
         Hdr = 0;
         Qptr = Buffer + (QHead * MaxPacketLength);
         *Qptr = CUart;
@@ -151,6 +154,9 @@ exit:
        INTCONbits.TMR0IF = 0;
        TimerPopCount += 1;
     }
+
+    
+		
   
    
 }

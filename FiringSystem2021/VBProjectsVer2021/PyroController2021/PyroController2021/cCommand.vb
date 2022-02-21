@@ -130,7 +130,7 @@ Public Class cCommand
         ShowTime = 0
         Try
 
-            CommPort.Broadcast(GlobalResetMessage)
+            CommPort.BroadcastReset(GlobalResetMessage)
         Catch
             MsgBox("Comm port not active")
         End Try
