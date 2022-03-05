@@ -259,4 +259,7 @@ Public Class fMain
     End Sub
 
     
+    Private Sub BuildToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BuildToolStripMenuItem.Click
+        Input.Show()
+    End Sub
 End Class

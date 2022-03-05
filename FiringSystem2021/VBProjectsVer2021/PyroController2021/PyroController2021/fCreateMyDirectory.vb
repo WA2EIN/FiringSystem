@@ -6,7 +6,7 @@ Public Class fCreateMyDirectory
         Me.Visible = False  ' Hide the form.  No need to show it
         FolderBrowserDialog1.ShowDialog()
         DirPath = FolderBrowserDialog1.SelectedPath & "\"
-        SaveSetting("PYRO", "New", "DirPath", DirPath)    ' Save to Registry
+        SaveSetting("PYRO2014", "New", "DirPath", DirPath)    ' Save to Registry
         CreateDirectory()    ' Located in Module1
         Me.Finalize()   ' Close the foorm
     End Sub

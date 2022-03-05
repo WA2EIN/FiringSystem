@@ -45,6 +45,7 @@ Partial Class fMain
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.BuildToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -145,7 +146,7 @@ Partial Class fMain
         '
         'ShowToolStripMenuItem
         '
-        Me.ShowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadShowToolStripMenuItem})
+        Me.ShowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadShowToolStripMenuItem, Me.BuildToolStripMenuItem})
         Me.ShowToolStripMenuItem.Name = "ShowToolStripMenuItem"
         Me.ShowToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ShowToolStripMenuItem.Text = "Show"
@@ -199,6 +200,12 @@ Partial Class fMain
         Me.Button1.Text = "Clear Trace"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'BuildToolStripMenuItem
+        '
+        Me.BuildToolStripMenuItem.Name = "BuildToolStripMenuItem"
+        Me.BuildToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BuildToolStripMenuItem.Text = "Build"
+        '
         'fMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -241,5 +248,6 @@ Partial Class fMain
     Friend WithEvents CleanRegistryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents QuieryBuildDateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents BuildToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

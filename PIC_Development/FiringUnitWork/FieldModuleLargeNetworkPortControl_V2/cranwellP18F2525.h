@@ -1341,49 +1341,71 @@ void vputsUSART( char *data, int len)
 
 
           void PinLOW(int Pin){
-          switch (Pin){case 3:
-          Pin3LOW();
-          break;case 4:
-          Pin4LOW();
-          break;case 5:
-          Pin5LOW();
-          break;case 6:
-          Pin6LOW();
-          break; case 7:
-          Pin7LOW();
-          break;case 9:
-          Pin9LOW();
-          break;case 10:
-          Pin10LOW();
-          break; case 11:
-          Pin11LOW();
-          break;case 12:
-          Pin12LOW();
-          break;case 13:
-          Pin13LOW();
-          break; case 14:
-          Pin14LOW();
-          break; case 15:
-          Pin15LOW();
-          break;case 16:
-          Pin16LOW();
-          break;case 21:
-          Pin21LOW();
-          break;case 22:
-          Pin22LOW();
-          break;case 23:
-          Pin23LOW();
-          break;case 24:
-          Pin24LOW();
-          break; case 25:
-          Pin25LOW();
-          break;case 26:
-          Pin26LOW();
-          break;case 27:
-          Pin27LOW();
-          break;case 28:
-          Pin28LOW();
-          break;}
+          switch (Pin)
+		{
+			case 3:
+         		 Pin3LOW();
+         		 break;	
+			case 4:
+          		Pin4LOW();
+          		break;
+			case 5:
+          		Pin5LOW();
+          		break;
+			case 6:
+          		Pin6LOW();
+          		break;
+			case 7:
+          		Pin7LOW();
+          		break;
+			case 9:
+          		Pin9LOW();
+          		break;
+			case 10:
+         		 Pin10LOW();
+          		break;
+			case 11:
+          		Pin11LOW();
+          		break;
+			case 12:
+          		Pin12LOW();
+          		break;
+			case 13:
+          		Pin13LOW();
+          		break;
+ 			case 14:
+          		Pin14LOW();
+          		break;
+ 			case 15:
+          		Pin15LOW();
+          		break;
+			case 16:
+          		Pin16LOW();
+          		break;
+			case 21:
+          		Pin21LOW();
+          		break;
+			case 22:
+          		Pin22LOW();
+          		break;
+			case 23:
+          		Pin23LOW();
+          		break;
+			case 24:
+          		Pin24LOW();
+          		break;
+ 			case 25:
+          		Pin25LOW();
+          		break;
+			case 26:
+          		Pin26LOW();
+          		break;
+			case 27:
+          		Pin27LOW();
+          		break;
+			case 28:
+          		Pin28LOW();
+          		break;}
 
 }
 
