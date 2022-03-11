@@ -1,5 +1,5 @@
-#pragma config  OSC=INTIO67,FCMEN=OFF, IESO=OFF, PWRT = ON, BOREN=OFF,   WDT=OFF,  WDTPS=128, MCLRE=ON,  LPT1OSC = OFF,PBADEN=OFF,LVP=OFF, DEBUG=OFF// , CPB=OFF,CP0=OFF,CP1=OFF,CP2=OFF, CPD = OFF
-#define Today "Build Date = 2/14/2022, (C) Peter C Cranwell, 2016"
+#pragma config  OSC=INTIO67,FCMEN=OFF, IESO=OFF, PWRT = ON, BOREN=OFF,   WDT=OFF,  WDTPS=128, MCLRE=ON,  LPT1OSC = OFF,PBADEN=OFF,LVP=OFF, DEBUG=OFF   // , CPB=OFF,CP0=OFF,CP1=OFF,CP2=OFF, CPD = OFF
+#define Today "Build Date = 3/10/2022, (C) Peter C Cranwell, 2022"
 #define MaxPacketLength            213    // Maximum Packet Length
 ram long                  MatchFireTime = 200;
 
@@ -275,7 +275,7 @@ RAM char                        cNumPorts[4] = "016";
 #define ReplyLength             47
 
 
-#define DefaultTOT              290         // Receive TOT MS
+#define DefaultTOT              80000        // Receive TOT MS
 #define TEventTOT               50          // TEvent Message Polling Time
 #define DeadManCount            180         // 15 Sec at Default TOT = 300 MS   (One count every 10 TOT)
 #define Out                     1  
@@ -665,6 +665,8 @@ extern int   volatile iStarting;
 void main(void)
 {
 
+
+
     /*
        Disable Watchdog timer
        WDT is used to reset processor if the COMM interrupt routine gets hung.  Under some conditions,
@@ -682,7 +684,9 @@ void main(void)
     ADCON1 = 0x0E;           // All RA0 = Analog, RA1:7 Digital
     TRISA  = 0x01;           // RA0 = Input
     ADCON2 = 0xDF;           // Right Justified, 20TAD, A/D Clock
-
+    //CCP1CON = 0x00;
+    //CCP2CON = 0x00;
+    
 
     Pin5LOW();
 
@@ -714,14 +718,7 @@ void main(void)
     iStarting = TRUE;
 
 
-    //ShowAddressAndSoftwareVersion();
-
-
-
-    Trace(Starting,None);
-
-
-
+   	ShowUnitAddress();
 
 
 
@@ -1968,6 +1965,7 @@ void Receive(char volatile Mesg[])
     AllPinsOff();
 
     Timer1MS += ResetTimer1();
+    Timer1MS++;
     if (Timer1MS > DefaultTOT)
     {
         Timer1MS = 0;
@@ -2014,6 +2012,7 @@ void ResetSlave(void)
     Pin6LOW();
     Pin28LOW();
 
+
   
     ResetAllPorts();
 
@@ -2057,6 +2056,14 @@ void ResetSlave(void)
     CloseTimer0();
     CloseTimer1();
     memset((char *)Message,'\0',sizeof(Message));
+
+
+	// Power down all pins
+	for(i=1; i<17; i++)
+	{
+		PinLOW(Cues[i]);
+	}		
+
 
 
     // Show Reset on Leds
@@ -2435,8 +2442,6 @@ void Fire(int Port)
 
     // Translate Port number to hardware address
     PortAddress = GetPortAddress(Port);
-
-
     PinHIGH(PortAddress);
 
     ShowTimeMS = GetTimeMS();
@@ -2658,8 +2663,9 @@ void Arm()
     ShowTimeMS = 0;
     StartTimer0();
     StartTimer1();
+	Timer1MS = 0;
     ClockStarted = TRUE; 
-    //ArmPending = FALSE;
+    ArmPending = FALSE;
 }
 
 void ReArm()
@@ -2669,6 +2675,7 @@ void ReArm()
     Pin6HIGH();
     ArmPending = FALSE;
     StartTimer0();
+	Timer1MS = 0;
     StartTimer1();
     ClockStarted = TRUE; 
 

@@ -1,4 +1,4 @@
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  1
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00001E B0D8           00042         btfsc   STATUS,C
 000020 8480           00043         bsf     SWTXD,SWTXDpin
 000022 EC?? F???      00044         call    DelayTXBitUART          ; Delay for 1 bit time
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  2
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -74,7 +74,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000                00053         GLOBAL  WriteUART
                       00054 
                       00055         END
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  3
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  3
 
 
 SYMBOL TABLE
@@ -133,7 +133,7 @@ C2OUT                             00000007
 CCP1                              00000002
 CCP1CON                           00000FBD
 CCP1IE                            00000002
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  4
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  4
 
 
 SYMBOL TABLE
@@ -192,7 +192,7 @@ CVREN                             00000007
 CVROE                             00000006
 CVRR                              00000005
 CVRSS                             00000004
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  5
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  5
 
 
 SYMBOL TABLE
@@ -251,7 +251,7 @@ GIEL                              00000006
 GIE_GIEH                          00000007
 GO                                00000001
 GO_DONE                           00000001
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  6
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  6
 
 
 SYMBOL TABLE
@@ -310,7 +310,7 @@ IVRST                             00000005
 KBI0                              00000004
 KBI1                              00000005
 KBI2                              00000006
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  7
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  7
 
 
 SYMBOL TABLE
@@ -369,7 +369,7 @@ NOT_PD                            00000002
 NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RI                            00000004
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  8
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  8
 
 
 SYMBOL TABLE
@@ -428,7 +428,7 @@ PR2                               00000FCB
 PREINC0                           00000FEC
 PREINC1                           00000FE4
 PREINC2                           00000FDC
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE  9
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE  9
 
 
 SYMBOL TABLE
@@ -487,7 +487,7 @@ RI                                00000004
 RSEN                              00000001
 RX                                00000007
 RX9                               00000006
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 10
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 10
 
 
 SYMBOL TABLE
@@ -546,7 +546,7 @@ STKPTR3                           00000003
 STKPTR4                           00000004
 STKUNF                            00000006
 SWDTE                             00000000
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 11
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 11
 
 
 SYMBOL TABLE
@@ -605,7 +605,7 @@ TMR0IP                            00000002
 TMR0L                             00000FD6
 TMR0ON                            00000007
 TMR1                              00000FCE
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 12
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 12
 
 
 SYMBOL TABLE
@@ -664,7 +664,7 @@ TRISC1                            00000001
 TRISC2                            00000002
 TRISC3                            00000003
 TRISC4                            00000004
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 13
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 13
 
 
 SYMBOL TABLE
@@ -723,7 +723,7 @@ _CONFIG4L                         00300006
 _CONFIG5H                         00300009
 _CONFIG5L                         00300008
 _CONFIG6H                         0030000B
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 14
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 14
 
 
 SYMBOL TABLE
@@ -782,7 +782,7 @@ _OSC_LP_1H                        000000F0
 _OSC_RCIO6_1H                     000000F7
 _OSC_RC_1H                        000000F3
 _OSC_XT_1H                        000000F1
-MPASM 5.54                      WRITUART.ASM   2-21-2022  10:39:00         PAGE 15
+MPASM 5.54                      WRITUART.ASM   3-10-2022  18:37:07         PAGE 15
 
 
 SYMBOL TABLE

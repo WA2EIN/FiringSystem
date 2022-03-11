@@ -760,7 +760,7 @@ Public Class fShow
 
         ' Arm Active Units with Unit Arm commands
 
-        For i = 1 To cueptr - 1
+        For i = 1 To cueptr
             BuildCueButtons(i)
         Next
 

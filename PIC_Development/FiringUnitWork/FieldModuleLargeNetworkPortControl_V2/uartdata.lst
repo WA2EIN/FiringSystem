@@ -1,4 +1,4 @@
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  1
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00206      INCLUDE <p18F25K80.INC>
                       00207   ENDIF
                       00208   IFDEF __18F2610
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  2
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00259   IFDEF __18F4321
                       00260      INCLUDE <p18F4321.INC>
                       00261   ENDIF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  3
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00312   ENDIF
                       00313   IFDEF __18F44K20
                       00314      INCLUDE <p18F44K20.INC>
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  4
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00365      INCLUDE <p18F45K20.INC>
                       00366   ENDIF
                       00367   IFDEF __18F45K22
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  5
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00418   IFDEF __18F6310
                       00419      INCLUDE <p18F6310.INC>
                       00420   ENDIF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  6
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00471   ENDIF
                       00472   IFDEF __18F65J90
                       00473      INCLUDE <p18F65J90.INC>
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  7
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00524      INCLUDE <p18F66J65.INC>
                       00525   ENDIF
                       00526   IFDEF __18F66J90
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  8
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00577   IFDEF __18F67K90
                       00578      INCLUDE <p18F67K90.INC>
                       00579   ENDIF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE  9
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00630   ENDIF
                       00631   IFDEF __18F85J50
                       00632      INCLUDE <p18F85J50.INC>
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 10
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00683      INCLUDE <p18F86J11.INC>
                       00684   ENDIF
                       00685   IFDEF __18F86J15
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 11
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,7 +647,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00736   IFDEF __18F87J50
                       00737      INCLUDE <p18F87J50.INC>
                       00738   ENDIF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 12
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -706,7 +706,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00789   ENDIF
                       00790   IFDEF __18LF24J10
                       00791      INCLUDE <p18LF24J10.INC>
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 13
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -765,7 +765,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00842      INCLUDE <p18LF27J13.INC>
                       00843   ENDIF
                       00844   IFDEF __18LF27J53
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 14
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -824,7 +824,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00895   IFDEF __18LF46K80
                       00896      INCLUDE <p18LF46K80.INC>
                       00897   ENDIF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 15
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -868,7 +868,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   0000                00021         GLOBAL  UARTErrorOR, UARTErrorFR 
                       00022         
                       00023         END
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 16
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 16
 
 
 SYMBOL TABLE
@@ -927,7 +927,7 @@ C2INV                             00000005
 C2OUT                             00000007
 CCP1                              00000002
 CCP1CON                           00000FBD
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 17
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 17
 
 
 SYMBOL TABLE
@@ -986,7 +986,7 @@ CVRCON                            00000FB5
 CVREN                             00000007
 CVROE                             00000006
 CVRR                              00000005
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 18
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 18
 
 
 SYMBOL TABLE
@@ -1045,7 +1045,7 @@ GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
 HLVDCON                           00000FD2
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 19
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 19
 
 
 SYMBOL TABLE
@@ -1104,7 +1104,7 @@ KBI1                              00000005
 KBI2                              00000006
 KBI3                              00000007
 LATA                              00000F89
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 20
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 20
 
 
 SYMBOL TABLE
@@ -1163,7 +1163,7 @@ NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RI                            00000004
 NOT_SS                            00000005
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 21
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 21
 
 
 SYMBOL TABLE
@@ -1222,7 +1222,7 @@ PR2                               00000FCB
 PREINC0                           00000FEC
 PREINC1                           00000FE4
 PREINC2                           00000FDC
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 22
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 22
 
 
 SYMBOL TABLE
@@ -1281,7 +1281,7 @@ RD16                              00000007
 RE3                               00000003
 RI                                00000004
 RSEN                              00000001
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 23
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 23
 
 
 SYMBOL TABLE
@@ -1340,7 +1340,7 @@ STKPTR1                           00000001
 STKPTR2                           00000002
 STKPTR3                           00000003
 STKPTR4                           00000004
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 24
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 24
 
 
 SYMBOL TABLE
@@ -1399,7 +1399,7 @@ TMR0ON                            00000007
 TMR1                              00000FCE
 TMR1CS                            00000001
 TMR1H                             00000FCF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 25
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 25
 
 
 SYMBOL TABLE
@@ -1458,7 +1458,7 @@ TRISC3                            00000003
 TRISC4                            00000004
 TRISC5                            00000005
 TRISC6                            00000006
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 26
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 26
 
 
 SYMBOL TABLE
@@ -1517,7 +1517,7 @@ _CONFIG5L                         00300008
 _CONFIG6H                         0030000B
 _CONFIG6L                         0030000A
 _CONFIG7H                         0030000D
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 27
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 27
 
 
 SYMBOL TABLE
@@ -1576,7 +1576,7 @@ _OSC_RC_1H                        000000F3
 _OSC_XT_1H                        000000F1
 _PBADEN_OFF_3H                    000000FD
 _PBADEN_ON_3H                     000000FF
-MPASM 5.54                      UARTDATA.ASM   2-21-2022  10:38:58         PAGE 28
+MPASM 5.54                      UARTDATA.ASM   3-10-2022  18:37:06         PAGE 28
 
 
 SYMBOL TABLE

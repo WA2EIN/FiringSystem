@@ -212,7 +212,7 @@ unsigned long ResetTimer1(void)
 
     // Elapsed time in MS since last reset.
     union Timers timer;
-    timer.bt[0] = TMR1L;  // Copy Timer0 low byte into union
+    timer.bt[0] = TMR1L;  // Copy Timer1 low byte into union
     timer.bt[1] = TMR1H; 
     Elapsed = timer.lt;
     MS = (Elapsed / 250) ;
@@ -826,133 +826,139 @@ void vputsUSART( char *data, int len)
           unsigned long  i;
 
           for (i = 0 ; i<MS; i++){
-          Delay10TCYx(196);
-          ClrWdt()
+            Delay10TCYx(196);
+            ClrWdt()
+            }
           }
-          }
-
-
 
 
 // Configuration for PIC18F2525
 
           void Pin3HIGH(void){
           // Port A, Bit 1
-
-          TRISA = TRISA & 0xFD;
-          LATA = LATA | 0x02;
-          PORTA = PORTA | 0x02;}
+          TRISAbits.TRISA1 = 0;
+          LATAbits.LATA1=1;
+          }
 
           void Pin3LOW(void){
           //PORT A, Bit 1
-          TRISA = TRISA & 0xFD;
-          LATA = LATA & 0xFD;
-          PORTA = PORTA & 0xFD;}
+          TRISAbits.TRISA1 = 0;
+          LATAbits.LATA1=0;
+         
+      	  }
 
           BIT GetPin3(void){
           // Change PORT A , Bit 1 to Input
-          TRISA = TRISA | 0x02;
-          PORTA & 0x02;
-          PORTA & 0x02; 
-          return(PORTA & 0x02);}
+          TRISAbits.TRISA1 = 1;
+          return(PORTAbits.RA1);
+          }
+
+
 
 
           void Pin4HIGH(void){
           // Port A, Bit 2
-          TRISA = TRISA & 0xFB;
-          LATA = LATA | 0x04;
-          PORTA = PORTA | 0x04;}
+          TRISAbits.TRISA2=0;	
+          LATAbits.LATA2=1;
+          }
 
           void Pin4LOW(void){
           //PORT A, Bit 2
-          TRISA = TRISA & 0xFB;
-          LATA = LATA & 0xFB;
-          PORTA = PORTA & 0xFB;}
-
+          TRISAbits.TRISA2=0;
+          LATAbits.LATA2=0;
+          }
+  
           BIT GetPin4(void){
           // Change PORT A , Bit 2 to Input
-          TRISA = TRISA | 0x04;
-          PORTA & 0x04;
-          PORTA & 0x04;
-          return(PORTA & 0x04);}
+          TRISAbits.TRISA2=1;	
+          return(PORTAbits.RA2);
+          }
+
 
 
 
           void Pin5HIGH(void){
           // Port A, Bit 3
-          TRISA = TRISA & 0xF7;
-          LATA = LATA | 0x08;
-          PORTA = PORTA | 0x08;}
+          TRISAbits.TRISA3 = 0;
+		  LATAbits.LATA3=1;
+		  }
+							
 
           void Pin5LOW(void){
           //PORT A, Bit 3
-          TRISA = TRISA & 0xF7;
-          LATA = LATA & 0xF7;
-          PORTA = PORTA & 0xF7;}
+          TRISAbits.TRISA3=0;
+		  LATAbits.LATA3=0;
+          }
 
           BIT GetPin5(void){
           // Change PORT A , Bit 3 to Input
-          TRISA = TRISA | 0x08;
-          PORTA & 0x08;
-          PORTA & 0x08; 
-          return(PORTA & 0x08);}
+          TRISAbits.TRISA3=1;
+          return(PORTAbits.RA3);
+          }
+
+
+
 
           void Pin6HIGH(void){
           // Port A, Bit 4
-          TRISA = TRISA & 0xEF;
-          LATA = LATA | 0x10;
-          PORTA = PORTA | 0x10;}
+          TRISAbits.TRISA4=0;
+          LATAbits.LATA4=1;
+          }
 
           void Pin6LOW(void){
           //PORT A, Bit 4
-          TRISA = TRISA & 0xEF;
-          LATA = LATA & 0xEF;
-          PORTA = PORTA & 0xEF;}
+          TRISAbits.TRISA4=0;
+	      LATAbits.LATA4=0;
+          }
 
           BIT GetPin6(void){
           // Change PORT A , Bit 4 to Input
-          TRISA = TRISA | 0x10;
-          PORTA & 0x10;
-          PORTA & 0x10;
-          return(PORTA & 0x10);}
+          TRISAbits.TRISA4=1;
+		  return(PORTAbits.RA4);
+		  }
+
+
+
+
 
           void Pin7HIGH(void){
           // Port A, Bit 5
-          TRISA = TRISA & 0xDF;
-          PORTA = PORTA | 0x20;}
+          TRISAbits.TRISA5 = 0;
+		  LATAbits.LATA5 = 1;
+		  }
 
           void Pin7LOW(void){
           //PORT A, Bit 5
-          TRISA = TRISA & 0xDF;
-          PORTA = PORTA & 0xDF;}
+          TRISAbits.TRISA5=0;
+		  LATAbits.LATA5=0;
+		  }
 
           BIT GetPin7(void){
           // Change PORT A , Bit 5 to Input
-          TRISA = TRISA | 0x20;
-          PORTA & 0x20;
-          PORTA & 0x20; 
-          return(PORTA & 0x20);}
-
+          TRISAbits.TRISA5=1;
+		  return(PORTAbits.RA5);		
+		  }
 
 
 
 
           void Pin9HIGH(void){
           // Port A, Bit 7
-          TRISA = TRISA & 0x7F;
-          PORTA = PORTA | 0x80;}
+          TRISAbits.TRISA7 = 0;
+          LATAbits.LATA7=1;
+		  }
 
           void Pin9LOW(void){
           //PORT A, Bit 7
-          TRISA = TRISA & 0x7F;
-          PORTA = PORTA & 0x7F;}
+          TRISAbits.TRISA7=0;
+		  LATAbits.LATA7=0;
+		  }
 
           BIT GetPin9(void){
           // Change PORT A , Bit 7 to Input
-          TRISA = TRISA | 0x80;
-          PORTA & 0x80;
-          PORTA & 0x80;
-          return(PORTA & 0x80);}
+          TRISAbits.TRISA7=1;
+		  return(PORTAbits.RA7);
+		  }
 
 
 
@@ -960,20 +966,21 @@ void vputsUSART( char *data, int len)
 
           void Pin10HIGH(void){
           // Port A, Bit 6
-          TRISA = TRISA & 0xBF;
-          PORTA = PORTA | 0x40;}
+          TRISAbits.TRISA6 = 0;
+		  LATAbits.LATA6=1;
+		  }
 
           void Pin10LOW(void){
           //PORT A, Bit 6
-          TRISA = TRISA & 0xBF;
-          PORTA = PORTA & 0xBF;}
+          TRISAbits.TRISA6=0;
+		  LATAbits.LATA6=0;
+		  }
 
           BIT GetPin10(void){
           // Change PORT A , Bit 6 to Input
-          TRISA = TRISA | 0x40;
-          PORTA & 0x40;
-          PORTA & 0x40; 
-          return(PORTA & 0x40);}
+          TRISAbits.TRISA6=1;
+		  return(PORTAbits.RA6);
+		  }
 
 
 
@@ -981,20 +988,21 @@ void vputsUSART( char *data, int len)
 
           void Pin11HIGH(void){
           // Port C, Bit0 
-          TRISC = TRISC & 0xFE;
-          PORTC = PORTC | 0x01;}
+          TRISCbits.TRISC0 = 0;
+		  LATCbits.LATC0=1;
+	  	  }
 
           void Pin11LOW(void){
           //PORT C, Bit 0
-          TRISC = TRISC & 0xFE;
-          PORTC = PORTC & 0xFE;}
+          TRISCbits.TRISC0=0;
+		  LATCbits.LATC0=0;
+		  }
 
           BIT GetPin11(void){
           // Change PORT C , Bit 0 to Input
-          TRISC = TRISC | 0x01;
-          PORTC & 0x01;
-          PORTC & 0x01;
-          return(PORTC & 0x01);}
+          TRISCbits.TRISC0=1;
+		  return(PORTCbits.RC0);
+		  }
 
 
 
@@ -1002,41 +1010,43 @@ void vputsUSART( char *data, int len)
 
           void Pin12HIGH(void){
           // PORT C, Bit 1
-
-          TRISC = TRISC & 0xFD;
-          PORTC = PORTC | 0x02;}
+          TRISCbits.TRISC1=0;
+		  LATCbits.LATC1=1;
+		  }
 
           void Pin12LOW(void){
           //PORT C, Bit 1
-          TRISC = TRISC & 0xFD;
-          PORTC = PORTC & 0xFD;}
+          TRISCbits.TRISC1=0;
+		  LATCbits.LATC1=0;
+		  }
 
           BIT GetPin12(void){
           // Change PORT C , Bit 1 to Input
-          TRISC = TRISC | 0x02;
-          PORTC & 0x02;
-          PORTC & 0x02;
-          return(PORTC & 0x02);}
+          TRISCbits.TRISC1=1;
+		  return(PORTCbits.RC1);
+		  }
+
 
 
 
 
           void Pin13HIGH(void){
           // PORT C, Bit 2
-          TRISC = TRISC & 0xFB;
-          PORTC = PORTC | 0x04;}
+          TRISCbits.TRISC2=0;
+		  LATCbits.LATC2=1;
+		  }
 
           void Pin13LOW(void){
           //PORT C, Bit 2
-          TRISC = TRISC & 0xFB;
-          PORTC = PORTC & 0xFB;}
+          TRISCbits.TRISC2=0;
+		  LATCbits.LATC2=0;
+		  }
 
           BIT GetPin13(void){
           // Change PORT C , Bit 2 to Input
-          TRISC = TRISC | 0x04;
-          PORTC & 0x04;
-          PORTC & 0x04;
-          return(PORTC & 0x04);}
+          TRISCbits.TRISC2=1;
+		  return(PORTCbits.RC2);
+		  }
 
 
 
@@ -1044,44 +1054,43 @@ void vputsUSART( char *data, int len)
 
           void Pin14HIGH(void){
           // PORT C, Bit 3
-          TRISC = TRISC & 0xF7;
-          PORTC = PORTC | 0x08;}
+          TRISCbits.TRISC3=0;
+		  LATCbits.LATC3=1;
+		  }
 
           void Pin14LOW(void){
           //PORT C, Bit 3
-          TRISC = TRISC & 0xF7;
-          PORTC = PORTC & 0xF7;}
+          TRISCbits.TRISC3=0;
+		  LATCbits.LATC3=0;
+		  }
 
           BIT GetPin14(void){
           // Change PORT C , Bit 3 to Input
-          TRISC = TRISC | 0x08;
-          PORTC & 0x08;
-          PORTC & 0x08;
-          return(PORTC & 0x08);}
+          TRISCbits.TRISC3=1;
+		  return(PORTCbits.RC3);
+		  }
+
 
 
 
 
           void Pin15HIGH(void){
           // PORT C, Bit 4
-          TRISC = TRISC & 0xEF;
-          PORTC = PORTC | 0x10;}
+          TRISCbits.TRISC4=0;
+		  LATCbits.LATC4=1;
+		  }
 
           void Pin15LOW(void){
           //PORT C, Bit 4
-          TRISC = TRISC & 0xEF;
-          PORTC = PORTC & 0xEF;}
+       	  TRISCbits.TRISC4=0;
+		  LATCbits.LATC4=0;
+		  }
 
           BIT GetPin15(void){
           // Change PORT C , Bit 4 to Input
-          TRISC = TRISC | 0x10;
-          PORTC & 0x10;
-          PORTC & 0x10;
-          return(PORTC & 0x10);}
-
-
-
-
+          TRISCbits.TRISC4=1;
+		  return(PORTCbits.RC4);
+		  }
 
 
 
@@ -1089,40 +1098,46 @@ void vputsUSART( char *data, int len)
 
           void Pin16HIGH(void){
           // PORT C, Bit 5
-          TRISC = TRISC & 0xDF;
-          PORTC = PORTC | 0x20;}
+          TRISCbits.TRISC5=0;
+		  LATCbits.LATC5=1;
+		  }
 
           void Pin16LOW(void){
           //PORT C, Bit 5
-          TRISC = TRISC & 0xDF;
-          PORTC = PORTC & 0xDF;}
+          TRISCbits.TRISC5=0;
+		  LATCbits.LATC5=0;
+		  }
 
           BIT GetPin16(void){
           // Change PORT C , Bit 5 to Input
-          TRISC = TRISC | 0x20;
-          PORTC & 0x20;
-          PORTC & 0x20; 
-          return(PORTC & 0x20);}
+          TRISCbits.TRISC5=1;
+		  return(PORTCbits.RC5);
+		  }
+
+
 
 
 
 
           void Pin21HIGH(void){
           // PORT B, Bit0 
-          TRISB = TRISB & 0xFE;
-          PORTB = PORTB | 0x01;}
+          TRISBbits.TRISB0=0;
+		  LATBbits.LATB0=1;
+		  }
 
           void Pin21LOW(void){
           //PORT B, Bit 0
-          TRISB = TRISB & 0xFE;
-          PORTB = PORTB & 0xFE;}
+          TRISBbits.TRISB0=0;
+		  LATBbits.LATB0=0;
+		  }
 
           BIT GetPin21(void){
           // Bhange PORT B , Bit 0 to Input
-          TRISB = TRISB | 0x01;
-          PORTB & 0x01;
-          PORTB & 0x01;
-          return(PORTB & 0x01);}
+          TRISBbits.TRISB0=1;
+		  return(PORTBbits.RB0);
+		  }
+
+
 
 
 
@@ -1130,59 +1145,69 @@ void vputsUSART( char *data, int len)
 
           void Pin22HIGH(void){
           // PORT B, Bit 1
-
-          TRISB = TRISB & 0xFD;
-          PORTB = PORTB | 0x02;}
+		  TRISBbits.TRISB1=0;
+		  LATBbits.LATB1=1;
+		  }
 
           void Pin22LOW(void){
           //PORT B, Bit 1
-          TRISB = TRISB & 0xFD;
-          PORTB = PORTB & 0xFD;}
+          TRISBbits.TRISB1=0;
+		  LATBbits.LATB1=0;
+		  }
 
           BIT GetPin22(void){
           // Change PORT B , Bit 1 to Input
-          TRISB = TRISB | 0x02;
-          PORTB & 0x02;
-          PORTB & 0x02;
-          return(PORTB & 0x02);}
+          TRISBbits.TRISB1=1;
+		  return(PORTBbits.RB1);
+		  }
+
+
+
 
 
 
           void Pin23HIGH(void){
           // PORT B, Bit 2
-          TRISB = TRISB & 0xFB;
-          PORTB = PORTB | 0x04;}
+          TRISBbits.TRISB2=0;
+		  LATBbits.LATB2=1;
+		  }
 
           void Pin23LOW(void){
           //PORT B, Bit 2
-          TRISB = TRISB & 0xFB;
-          PORTB = PORTB & 0xFB;}
+          TRISBbits.TRISB2=0;
+		  LATBbits.LATB2=0;
+		  }
 
           BIT GetPin23(void){
           // Change PORT B , Bit 2 to Input
-          TRISB = TRISB | 0x04;
-          PORTB & 0x04;
-          PORTB & 0x04; 
-          return(PORTB & 0x04);}
+          TRISBbits.TRISB2=1;
+		  return(PORTBbits.RB2);
+		  }
+
+
+
+
 
 
 
           void Pin24HIGH(void){
           // PORT B, Bit 3
-          TRISB = TRISB & 0xF7;
-          PORTB = PORTB | 0x08;}
+          TRISBbits.TRISB3=0;
+		  LATBbits.LATB3=1;
+		  }
 
           void Pin24LOW(void){
           //PORT B, Bit 3
-          TRISB = TRISB & 0xF7;
-          PORTB = PORTB & 0xF7;}
+          TRISBbits.TRISB3=0;
+		  LATBbits.LATB3=0;
+		  }
 
           BIT GetPin24(void){
           // Change PORT B , Bit 3 to Input
-          TRISB = TRISB | 0x08;
-          PORTB & 0x08;
-          PORTB & 0x08;
-          return(PORTB & 0x08);}
+          TRISBbits.TRISB3=1;
+		  return(PORTBbits.RB3);
+		  }
+
 
 
 
@@ -1190,79 +1215,100 @@ void vputsUSART( char *data, int len)
 
           void Pin25HIGH(void){
           // PORT B, Bit 4
-          TRISB = TRISB & 0xEF;
-          PORTB = PORTB | 0x10;}
+          TRISBbits.TRISB4=0;
+		  LATBbits.LATB4=1;
+		  }
 
           void Pin25LOW(void){
           //PORT B, Bit 4
-          TRISB = TRISB & 0xEF;
-          PORTB = PORTB & 0xEF;}
+          TRISBbits.TRISB4=0;
+		  LATBbits.LATB4=0;
+		  }
 
           BIT GetPin25(void){
           // Change PORT B , Bit 4 to Input
-          TRISB = TRISB | 0x10;
-          PORTB & 0x10;
-          PORTB & 0x10;
-          return(PORTB & 0x10);}
+          TRISBbits.TRISB4=1;
+		  return(PORTBbits.RB4);
+		  }
+
 
 
 
 
           void Pin26HIGH(void){
           // PORT B, Bit 5
-          TRISB = TRISB & 0xDF;
-          PORTB = PORTB | 0x20;}
+          TRISBbits.TRISB5=0;
+		  LATBbits.LATB5=1;
+		  }
 
           void Pin26LOW(void){
           //PORT B, Bit 5
-          TRISB = TRISB & 0xDF;
-          PORTB = PORTB & 0xDF;}
+          TRISBbits.TRISB5=0;
+		  LATBbits.LATB5=0;
+		  }
 
           BIT GetPin26(void){
           // Change PORT B , Bit 5 to Input
-          TRISB = TRISB | 0x20;
-          PORTB & 0x20;
-          PORTB & 0x20;
-          return(PORTB & 0x20);}
+          TRISBbits.TRISB5=1;
+		  return(PORTBbits.RB5);
+		  }
+
+
+
 
 
 
           void Pin27HIGH(void){
           // PORT B, Bit 6
-          TRISB = TRISB & 0xBF;
-          PORTB = PORTB | 0x40;}
+          TRISBbits.TRISB6=0;
+		  LATBbits.LATB6=1;
+		  }
 
           void Pin27LOW(void){
           //PORT B, Bit 6
-          TRISB = TRISB & 0xBF;
-          PORTB = PORTB & 0xBF;}
+          TRISBbits.TRISB6=0;
+		  LATBbits.LATB6=0;
+		  }
 
           BIT GetPin27(void){
           // Change PORT B , Bit 6 to Input
-          TRISB = TRISB | 0x40;
-          PORTB & 0x40;
-          PORTB & 0x40;
-          return(PORTB & 0x40);}
+          TRISBbits.TRISB6=1;
+		  return(PORTBbits.RB6);
+		  }
+
+
 
 
 
 
           void Pin28HIGH(void){
           // PORT B, Bit 7
-          TRISB = TRISB & 0x7F;
-          PORTB = PORTB | 0x80;}
+          TRISBbits.TRISB7=0;
+		  LATBbits.LATB7=1;
+		  }
 
           void Pin28LOW(void){
           //PORT B, Bit 7
-          TRISB = TRISB & 0x7F;
-          PORTB = PORTB & 0x7F;}
+          TRISBbits.TRISB7=0;
+		  LATBbits.LATB7=0;
+		  }
 
           BIT GetPin28(void){
           // Change PORT B , Bit 7 to Input
-          TRISB = TRISB | 0x80;
-          PORTB & 0x80;
-          PORTB & 0x80;
-          return(PORTB & 0x80);}
+          TRISBbits.TRISB7=1;
+		  return(PORTBbits.RB7);
+		  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1342,7 +1388,7 @@ void vputsUSART( char *data, int len)
 
           void PinLOW(int Pin){
           switch (Pin)
-		{
+			{
 			case 3:
          		 Pin3LOW();
          		 break;	
@@ -1405,60 +1451,83 @@ void vputsUSART( char *data, int len)
           		break;
 			case 28:
           		Pin28LOW();
-          		break;}
+          		break;
+			}
 
-}
+		}
 
 
 
 
 
           int PinTest(int Port){
-          switch (Port){case 3:
-          return GetPin3();
-          break;case 4:
-          return GetPin4();
-          break;case 5:
-          return GetPin5();
-          break;case 6:
-          return GetPin6();
-          break; case 7:
-          return GetPin7();
-          break;case 9:
-          return GetPin9();
-          break;case 10:
-          return GetPin10();
-          break;case 11:
-          return GetPin11();
-          break;case 12:
-          return GetPin12();
-          break;case 13:
-          return GetPin13();
-          break; case 14:
-          return GetPin14();
-          break; case 15:
-          return GetPin15();
-          break;case 16:
-          return GetPin16();
-          break;case 21:
-          return GetPin21();
-          break;case 22:
-          return GetPin22();
-          break;case 23:
-          return GetPin23();
-          break;case 24:
-          return GetPin24();
-          break;case 25:
-          return GetPin25();
-          break;case 26:
-          return GetPin26();
-          break;case 27:
-          return GetPin27();
-          break;case 28:
-          return GetPin28();
-          break;
+          switch (Port){
+			case 3:
+          		return GetPin3();
+          		break;
+			case 4:
+          		return GetPin4();
+          		break;
+			case 5:
+          		return GetPin5();
+          		break;
+			case 6:
+          		return GetPin6();
+         		break; 
+			case 7:
+          		return GetPin7();
+          		break;
+			case 9:
+          		return GetPin9();
+          		break;
+			case 10:
+          		return GetPin10();
+          		break;
+			case 11:
+          		return GetPin11();
+         	 	break;
+			case 12:
+          		return GetPin12();
+          		break;
+			case 13:
+          		return GetPin13();
+         		break; 
+			case 14:
+          		return GetPin14();
+         		break;
+			case 15:
+          		return GetPin15();
+         		break;
+			case 16:
+          		return GetPin16();
+          		break;
+			case 21:
+          		return GetPin21();
+          		break;
+			case 22:
+          		return GetPin22();
+          		break;
+			case 23:
+          		return GetPin23();
+          		break;
+			case 24:
+          		return GetPin24();
+         		break;
+			case 25:
+          		return GetPin25();
+          		break;
+			case 26:
+          		return GetPin26();
+          		break;
+			case 27:
+          		return GetPin27();
+          		break;
+			case 28:
+          		return GetPin28();
+          		break;
 
-}}
+					}
+			}
 
 
 
@@ -1466,13 +1535,14 @@ void vputsUSART( char *data, int len)
 
           void Pause (int MS){
           // Assumes a 40 Mhz clck
-
           Delay10KTCYx(MS);
+		  }
 
-}
+
 
           int abs (int i){
-          return((i<0) ? -i : i);}
+          return((i<0) ? -i : i);
+          }
 
 
 
